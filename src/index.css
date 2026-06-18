@@ -1,0 +1,156 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #846044;
+  --color-secondary: #98a086;
+  --color-healing-bg: #f7ece1;
+  --color-healing-card: #ffffff;
+  --color-healing-success: #22c55e;
+  --color-healing-text: #3b2d24;
+
+  --color-indigo-50: #fbf9f6;
+  --color-indigo-100: #f5ece1;
+  --color-indigo-200: #dfccb1;
+  --color-indigo-300: #cca88d;
+  --color-indigo-400: #c4a071;
+  --color-indigo-500: #a76d5e;
+  --color-indigo-600: #846044;
+  --color-indigo-700: #6b4c34;
+  --color-indigo-800: #523a27;
+  --color-indigo-900: #3b281b;
+  --color-indigo-950: #241810;
+
+  --color-violet-50: #f4f6f3;
+  --color-violet-100: #e3e7e1;
+  --color-violet-200: #c9d1c4;
+  --color-violet-300: #afbaa7;
+  --color-violet-400: #98a086;
+  --color-violet-500: #98a086;
+  --color-violet-600: #7c8567;
+  --color-violet-700: #60684f;
+  --color-violet-800: #464b39;
+  --color-violet-900: #2c2f24;
+  --color-violet-950: #1a1c16;
+
+  --color-slate-50: #fbf9f6;
+  --color-slate-100: #f5ece1;
+  --color-slate-200: #dfccb1;
+  --color-slate-300: #cca88d;
+  --color-slate-350: #cca88d;
+  --color-slate-400: #a76d5e;
+  --color-slate-450: #a76d5e;
+  --color-slate-500: #846044;
+  --color-slate-700: #3b2d24;
+  --color-slate-800: #291f19;
+  --color-slate-850: #221813;
+  --color-slate-900: #221813;
+  --color-slate-950: #15100c;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--color-healing-bg);
+  color: var(--color-healing-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode Overrides */
+html.dark body {
+  background-color: #15100c;
+  color: #f5ece1;
+}
+
+/* Scrollbar styling ala Notion */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cca88d;
+  border-radius: 9999px;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #6b4c34;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a76d5e;
+}
+
+/* Breath Animation */
+@keyframes breath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 1;
+  }
+}
+
+.animate-breath {
+  animation: breath 8s ease-in-out infinite;
+}
+
+/* Glow Effects */
+.shadow-glow-primary {
+  box-shadow: 0 0 20px 2px rgba(132, 96, 68, 0.25);
+}
+.shadow-glow-secondary {
+  box-shadow: 0 0 20px 2px rgba(152, 160, 134, 0.25);
+}
+.shadow-glow-rose {
+  box-shadow: 0 0 20px 2px rgba(167, 109, 94, 0.3);
+}
+.shadow-glow-tan {
+  box-shadow: 0 0 20px 2px rgba(196, 160, 113, 0.3);
+}
+
+.text-glow-rose {
+  text-shadow: 0 0 8px rgba(167, 109, 94, 0.5);
+}
+.text-glow-primary {
+  text-shadow: 0 0 8px rgba(132, 96, 68, 0.5);
+}
+
+/* Cozy Gradients using theme palette: Sage Green, Dusty Rose, Golden Tan, Warm Beige, Terracotta Brown */
+.bg-gradient-cozy {
+  background: linear-gradient(135deg, #dfccb1 0%, #c4a071 50%, #846044 100%);
+}
+.bg-gradient-cozy-soft {
+  background: linear-gradient(135deg, #fbf9f6 0%, #f5ece1 50%, #dfccb1 100%);
+}
+.bg-gradient-earth {
+  background: linear-gradient(135deg, #98a086 0%, #c4a071 50%, #846044 100%);
+}
+.bg-gradient-sunset {
+  background: linear-gradient(135deg, #a76d5e 0%, #c4a071 50%, #98a086 100%);
+}
+
+
+/* Global Form Inputs Text Color & Background Overrides for High Contrast */
+input:not([type="checkbox"]), textarea, select {
+  background-color: #ffffff !important;
+  color: #3b2d24 !important;
+  border-color: #dfccb1 !important;
+}
+
+/* Hanya ubah di dark mode dan di luar halaman auth */
+html.dark :not(.auth-page) input:not([type="checkbox"]), 
+html.dark :not(.auth-page) textarea, 
+html.dark :not(.auth-page) select {
+  background-color: #291f19 !important; /* bg-slate-800 */
+  color: #f5ece1 !important; /* text-white */
+  border-color: #3b2d24 !important; /* border-slate-700 */
+}

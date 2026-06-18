@@ -1,0 +1,415 @@
+import { useState } from "react";
+
+export default function Education() {
+  const [selectedArticle, setSelectedArticle] = useState(null);
+
+  const articles = [
+    {
+      title: "Mengenali Hubungan Toxic dan Cara Keluar Darinya",
+      category: "Hubungan",
+      time: "5 menit baca",
+      icon: "🥀",
+      color: "bg-red-50 text-red-700 border-red-100",
+      intro: "Apakah hubunganmu membuatmu lelah secara emosional? Yuk, pelajari ciri-ciri hubungan tidak sehat (toxic) dan cara berani mengambil keputusan terbaik untuk dirimu.",
+      content: `Hubungan interpersonal seharusnya menjadi tempat aman di mana kita merasa didengar, dihargai, dan didukung. Namun, kenyataannya ada kalanya sebuah hubungan justru berubah menjadi sumber utama stres, kecemasan, dan rasa tidak percaya diri. Kondisi ini sering kali kita kenal dengan istilah hubungan toxic atau tidak sehat.
+
+Ciri utama dari hubungan toxic adalah ketidakseimbangan energi. Kamu akan merasa bahwa kamu selalu memberi, mengalah, dan menyesuaikan diri, sementara pihak lain terus menuntut atau mengontrol hidupmu. Manipulasi emosional, seperti disalahkan atas kesalahan orang lain (gaslighting) atau dibuat merasa bersalah ketika mengekspresikan pendapat pribadi, juga merupakan tanda bahaya yang nyata.
+
+Bagaimana cara mulai melepaskan diri dari lingkaran ini?
+Langkah pertama yang paling penting adalah menyadari dan mengakui bahwa hubungan tersebut memang tidak sehat. Sering kali kita terjebak dalam fase penyangkalan karena mengingat masa-masa indah yang pernah dilewati bersama. Padahal, masa lalu yang indah tidak bisa dijadikan alasan untuk membenarkan perlakuan buruk di masa sekarang.
+
+Kedua, mulailah menetapkan batasan yang tegas. Komunikasikan apa yang bisa kamu toleransi dan apa yang tidak. Jika pihak lain tidak menghargai batasan tersebut, itu adalah sinyal kuat bahwa kamu perlu menjaga jarak demi kesehatan mentalmu sendiri.
+
+Ketiga, bangun kembali sistem pendukungmu. Hubungan toxic sering kali mengisolasi korbannya dari teman dekat dan keluarga. Hubungi kembali orang-orang yang tulus menyayangimu. Ingatlah bahwa kamu berhak mendapatkan hubungan yang sehat, penuh rasa hormat, dan saling mendukung.`
+    },
+    {
+      title: "Navigasi Tekanan Teman Sebaya di Era Pergaulan Bebas",
+      category: "Kesehatan Mental",
+      time: "5 menit baca",
+      icon: "🧭",
+      color: "bg-indigo-50 text-indigo-700 border-indigo-100",
+      intro: "Tekanan pergaulan sering kali memaksa kita mengikuti standar kelompok yang bertentangan dengan nurani. Simak cara asertif menjaga prinsip dirimu.",
+      content: `Sebagai makhluk sosial, keinginan untuk diterima dan menjadi bagian dari suatu kelompok adalah hal yang sangat alami. Di masa remaja dan dewasa muda, pengaruh teman sebaya (peer pressure) sering kali memegang peranan yang sangat kuat. Sayangnya, tidak semua pengaruh kelompok itu berdampak positif. Terkadang, demi rasa solidaritas atau agar dianggap keren, kita merasa tertekan untuk mengikuti gaya hidup yang tidak sehat atau pergaulan bebas yang sebenarnya bertentangan dengan nilai-nilai pribadi kita.
+
+Menolak ajakan kelompok memang membutuhkan keberanian yang besar. Ada rasa takut akan dikucilkan, dianggap membosankan, atau kehilangan teman. Namun, penting untuk disadari bahwa pertemanan yang tulus tidak akan pernah menuntutmu untuk merusak dirimu sendiri atau mengabaikan prinsip hidupmu demi kenyamanan mereka.
+
+Bagaimana cara asertif menjaga prinsip diri di tengah pergaulan?
+Pertama, kenali nilai-nilai hidupmu dengan jelas. Putuskan apa yang benar-benar baik untuk masa depanmu. Ketika kamu memiliki komitmen yang kuat terhadap dirimu sendiri, kamu tidak akan mudah goyah oleh bujuk rayu luar.
+
+Kedua, latih cara menolak dengan tenang namun tegas. Kamu tidak perlu marah atau menceramahi teman-temanmu. Cukup katakan tidak dengan sopan, misalnya dengan kalimat: Terima kasih ajakannya, tapi aku sedang tidak tertarik untuk mencobanya. Memberikan penolakan yang jujur dan konsisten akan membuat orang lain menghargai batasanmu.
+
+Ketiga, carilah lingkaran pertemanan baru yang memiliki nilai-nilai yang sama denganmu. Berada di lingkungan orang-orang yang saling mendukung pertumbuhan positif akan membuatmu merasa nyaman menjadi diri sendiri tanpa perlu berpura-pura.`
+    },
+    {
+      title: "Menyembuhkan Luka Batin Akibat Dinamika Keluarga yang Kurang Sehat",
+      category: "Kesehatan Mental",
+      time: "6 menit baca",
+      icon: "🏡",
+      color: "bg-amber-50 text-amber-700 border-amber-100",
+      intro: "Keluarga adalah rumah pertama, namun terkadang juga menjadi tempat tumbuhnya luka terdalam. Mari belajar menerima masa lalu dan pulih secara perlahan.",
+      content: `Secara ideal, keluarga digambarkan sebagai tempat bernaung yang penuh kasih sayang, kehangatan, dan penerimaan tanpa syarat. Namun bagi sebagian dari kita, kenyataannya tidak selalu seindah itu. Konflik yang berkepanjangan, kritik yang terus-menerus, penolakan emosional, atau ekspektasi yang terlalu tinggi dari orang tua dapat meninggalkan luka batin yang mendalam hingga dewasa. Kondisi ini sering kali memicu kecemasan, depresi, atau rendahnya rasa percaya diri.
+
+Menghadapi kenyataan bahwa rumah pertamamu bukanlah tempat yang aman adalah proses yang sangat berat. Kita sering kali merasa bersalah atau menganggap diri kita yang salah karena tidak bisa memenuhi harapan keluarga. Padahal, setiap anak berhak untuk tumbuh di lingkungan yang penuh kedamaian emosional.
+
+Langkah pemulihan batin yang bisa kamu pelajari:
+Pertama, terimalah bahwa kamu tidak bisa mengubah perilakunya orang tuamu atau anggota keluargamu. Menyadari keterbatasan kendali ini akan membebaskanmu dari beban berat untuk selalu mencoba memperbaiki keadaan yang berada di luar kuasamu. Fokuslah pada respon emosionalmu sendiri.
+
+Kedua, terapkan batasan fisik dan emosional yang sehat. Jika tinggal bersama keluarga terasa terlalu melelahkan secara mental, luangkan waktu di luar rumah untuk kegiatan produktif, atau batasi topik pembicaraan yang sensitif saat berinteraksi. Menjaga jarak yang sehat bukan berarti kamu tidak menyayangi mereka, melainkan tindakan perlindungan diri agar jiwamu tetap stabil.
+
+Ketiga, praktikan self-parenting. Belajarlah untuk memberikan kasih sayang, penghargaan, dan kelembutan pada dirimu sendiri yang mungkin tidak kamu dapatkan dari keluargamu. Kamu adalah orang dewasa yang kini memegang kendali penuh atas kebahagiaan dan masa depanmu sendiri.`
+    },
+    {
+      title: "Memahami Bentuk Kekerasan dalam Rumah Tangga dan Mencari Bantuan",
+      category: "Hubungan",
+      time: "5 menit baca",
+      icon: "🚪",
+      color: "bg-red-50 text-red-700 border-red-100",
+      intro: "Kekerasan dalam rumah tangga bukan hanya luka fisik, tapi juga mental. Ketahui jenis-jenisnya dan bagaimana cara aman mencari bantuan terdekat.",
+      content: `Kekerasan Dalam Rumah Tangga (KDRT) adalah isu yang sangat sensitif namun sangat penting untuk dibicarakan secara terbuka. KDRT tidak melulu berupa kekerasan fisik yang meninggalkan bekas luka kasat mata. Bentuk kekerasan emosional seperti ancaman, intimidasi, penghinaan verbal yang merusak harga diri, pembatasan ruang gerak secara ekstrem, hingga kontrol keuangan sepihak (kekerasan ekonomi) adalah bagian dari KDRT yang sering kali tidak disadari oleh korbannya.
+
+Dampak psikologis dari KDRT sangat menghancurkan. Korban biasanya mengalami trauma mendalam, rasa ketakutan yang konstan, depresi, hingga hilangnya rasa percaya terhadap lingkungan sekitar. Sering kali korban merasa terjebak karena merasa tidak memiliki tempat tujuan atau takut akan konsekuensi sosial jika bersuara.
+
+Bagaimana cara menyikapi situasi ini secara aman?
+Pertama, ketahuilah bahwa kekerasan dalam bentuk apa pun tidak pernah dibenarkan, dan itu sama sekali bukan kesalahanmu. Pelaku kekerasan sering kali memanipulasi korban agar merasa bahwa merekalah penyebab terjadinya kekerasan tersebut. Kamu berhak atas keselamatan hidup dan kedamaian jiwamu.
+
+Kedua, dokumentasikan kejadian yang kamu alami jika memungkinkan secara aman. Catat tanggal, waktu, kronologi kejadian, serta simpan bukti foto luka atau pesan teks berisi ancaman. Dokumentasi ini akan sangat berguna jika kamu memutuskan untuk menempuh jalur hukum.
+
+Ketiga, cari bantuan profesional atau jaringan sosial yang aman. Bicaralah dengan konselor kesehatan mental, kunjungi lembaga bantuan hukum, atau hubungi pusat layanan pengaduan kekerasan perempuan dan anak terdekat di kotamu. Jangan memendam masalah ini sendirian; pertolongan selalu tersedia untuk membantumu keluar dari situasi yang membahayakan.`
+    },
+    {
+      title: "Berdamai dengan Rasa Insecure: Menghargai Keunikan Diri Sendiri",
+      category: "Psikologi Positif",
+      time: "5 menit baca",
+      icon: "💎",
+      color: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      intro: "Sering membandingkan diri dengan pencapaian orang lain? Insecurity adalah hal wajar, namun mari belajar mengubahnya menjadi kekuatan positif.",
+      content: `Pernahkah kamu melihat postingan teman di media sosial dan tiba-tiba merasa bahwa hidupmu jalan di tempat? Atau mungkin kamu sering merasa ragu pada kemampuan dirimu sendiri saat ingin memulai hal baru? Perasaan tidak aman, ragu, atau kurang percaya diri ini biasa disebut dengan insecurity.
+
+Insecurity sebenarnya adalah mekanisme alami otak untuk melindungi diri dari kegagalan atau penolakan sosial. Namun, jika dibiarkan mendominasi pikiranmu, rasa cemas ini akan menghambat potensimu untuk berkembang dan membuatmu terus-menerus merasa kurang.
+
+Cara berdamai dengan rasa insecure secara bertahap:
+Pertama, ubah fokus pembandingmu. Alih-alih membandingkan bab pertama hidupmu dengan bab pertengahan hidup orang lain yang tampak berkilau di media sosial, bandingkan dirimu hari ini dengan dirimu di masa lalu. Sadarilah sekecil apa pun kemajuan yang sudah kamu buat dengan penuh rasa syukur.
+
+Kedua, terima ketidaksempurnaan sebagai bagian dari keindahan hidup. Tidak ada manusia yang memiliki kehidupan sempurna tanpa cela. Setiap orang memiliki perjuangan, kegagalan, dan kecemasannya masing-masing yang tidak mereka tampilkan ke permukaan.
+
+Ketiga, apresiasi kelebihan dan keunikan yang kamu miliki. Tuliskan hal-hari yang berhasil kamu lakukan dengan baik, sekecil apa pun itu. Fokuslah mengembangkan kelebihan tersebut daripada terus meratapi kekuranganmu. Kamu berharga apa adanya.`
+    },
+    {
+      title: "Seni Bersahabat dengan Overthinking di Malam Hari",
+      category: "Kecemasan",
+      time: "5 menit baca",
+      icon: "🧠",
+      color: "bg-amber-50 text-amber-700 border-amber-100",
+      intro: "Pernahkah kamu berbaring di tempat tidur, siap untuk memejamkan mata, tapi otakmu justru mulai memutar kembali kesalahan masa lalu? Yuk, pelajari cara menenangkannya secara bertahap.",
+      content: `Pernahkah kamu berbaring di tempat tidur, merasa sangat lelah, tetapi otakmu justru memutuskan untuk memutar ulang percakapan canggung beberapa tahun lalu? Atau mungkin kamu mendadak mencemaskan masa depan yang bahkan belum terjadi? Selamat, kamu sedang mengalami situasi yang biasa disebut overthinking.
+
+Overthinking sebenarnya adalah tanda bahwa otak kita sedang berusaha terlalu keras untuk melindungimu dari bahaya. Otak mengira ada masalah besar yang harus segera diselesaikan, padahal tubuhmu hanya butuh istirahat. Sayangnya, semakin kita memaksa pikiran untuk diam, suara bising itu justru akan terdengar semakin keras di malam hari.
+
+Langkah bersahabat yang bisa kamu coba:
+Pertama, akui kehadirannya. Alih-alih kesal, cobalah katakan pada dirimu sendiri bahwa otakmu sedang khawatir lagi. Ucapkan terima kasih karena otak sudah berusaha melindungimu, tapi katakan juga bahwa sekarang saatnya tidur. Hal ini bisa mengurangi tensi emosional.
+
+Kedua, keluarkan dari kepala. Sediakan kertas dan pena di dekat kasur. Tuliskan apa saja yang mengganggu pikiranmu secara acak. Setelah semuanya tertuang di kertas, otak akan merasa tugasnya untuk mengingat kekhawatiran itu sudah selesai.
+
+Ketiga, fokus pada sensasi fisik. Tarik perhatianmu dari isi pikiran ke tubuhmu. Rasakan berat tubuhmu yang menempel di kasur, dinginnya udara kamar, atau kehangatan selimutmu. Cara sederhana ini membantu menurunkan gelombang otak agar siap terlelap.`
+    },
+    {
+      title: "Latihan Napas Sederhana untuk Menenangkan Jantung yang Berdebar",
+      category: "Kecemasan",
+      time: "4 menit baca",
+      icon: "🌬️",
+      color: "bg-amber-50 text-amber-700 border-amber-100",
+      intro: "Saat rasa cemas menyerang, dada terasa sesak dan jantung berdebar kencang. Tenang, ada teknik napas cepat untuk mengirim sinyal aman ke otakmu.",
+      content: `Ketika kita merasa cemas, tubuh kita secara otomatis mengaktifkan mode siaga. Jantung berdetak lebih cepat, napas menjadi dangkal, dan otot-otot menegang. Kondisi ini sering kali membuat kita semakin panik karena merasa kehilangan kendali atas tubuh sendiri.
+
+Kunci utama untuk mematikan alarm kepanikan ini ada pada napasmu. Saat kamu memperlambat dan memperdalam napas, kamu mengirimkan sinyal fisik ke otak bahwa situasi saat ini sebenarnya aman. Sinyal inilah yang akan menurunkan detak jantung secara instan.
+
+Mari kita coba teknik napas secara santai:
+Embuskan napas sepenuhnya lewat mulut sampai terdengar suara mendesah pelan. Kemudian tutup mulutmu, lalu hirup napas perlahan lewat hidung sambil berhitung satu sampai empat dalam hati. Rasakan udara segar mengisi perutmu secara mendalam.
+
+Setelah itu, tahan napasmu dan hitung dari satu sampai tujuh dalam hati. Jangan menahan dengan tegang; rilekskan bahu dan otot lehermu. Terakhir, embuskan napas kembali secara perlahan lewat mulut dengan suara mendesah lembut selama delapan detik penuh.
+
+Cobalah lakukan siklus ini sebanyak empat kali. Kamu akan merasakan sensasi hangat dan ketenangan yang perlahan mengalir kembali ke seluruh tubuhmu.`
+    },
+    {
+      title: "Menghadapi Deadline Tanpa Harus Mengorbankan Kewarasan",
+      category: "Manajemen Stres",
+      time: "6 menit baca",
+      icon: "⏰",
+      color: "bg-red-50 text-red-700 border-red-100",
+      intro: "Pekerjaan menumpuk dan deadline sudah di depan mata? Jangan panik dulu. Yuk, simak cara menyelesaikannya secara bertahap tanpa perlu burnout.",
+      content: `Deadline yang mendekat sering kali menjadi pemicu stres nomor satu bagi banyak dari kita. Lucunya, saat stres memuncak, kita justru cenderung menunda-nunda pekerjaan atau mengalami prokrastinasi karena otak merasa terbebani melihat tumpukan tugas yang begitu besar. Ini adalah lingkaran setan yang melelahkan.
+
+Untuk memutus siklus ini, kita perlu mengubah cara kita memandang tugas tersebut. Alih-alih melihatnya sebagai satu gunung besar yang harus didaki sekaligus, mari kita pecah menjadi bukit-bukit kecil yang lebih mudah dilewati.
+
+Berikut tips praktis dari meja konselor untukmu:
+Cobalah aturan lima menit. Jika kamu sangat malas memulai, katakan pada dirimu sendiri bahwa kamu hanya akan mengerjakan tugas itu selama lima menit saja. Setelah waktu berlalu, kamu bebas untuk berhenti. Faktanya, langkah tersulit adalah memulai. Begitu kamu sudah berjalan selama lima menit, biasanya otak akan lebih mudah untuk melanjutkan.
+
+Selain itu, singkirkan gangguan visual. Bersihkan mejamu dari barang-barang yang tidak diperlukan. Ponsel yang menyala di dekatmu adalah musuh utama fokus. Letakkan ponsel di ruangan lain atau gunakan mode senyap selama kamu bekerja.
+
+Beri pula dirimu jeda. Bekerja tanpa henti justru akan merusak kualitas hasil pekerjaanmu. Berikan jeda istirahat lima menit setiap kali selesai bekerja selama dua puluh lima menit. Gunakan jeda ini untuk minum air atau melihat pemandangan di luar jendela.`
+    },
+    {
+      title: "Menumpahkan Emosi Lewat Tulisan: Terapi Jurnal saat Sedih",
+      category: "Kesehatan Mental",
+      time: "5 menit baca",
+      icon: "✍️",
+      color: "bg-indigo-50 text-indigo-700 border-indigo-100",
+      intro: "Terkadang, kesedihan terasa terlalu berat untuk diucapkan. Menuliskannya tanpa sensor bisa menjadi cara terbaik untuk merilis beban di dada.",
+      content: `Ada hari-hari di mana kesedihan datang seperti kabut tebal, membuat segalanya terasa abu-abu dan berat. Di saat seperti ini, orang-orang di sekitar kita sering kali berkata untuk bercerita. Namun kenyataannya, terkadang kita sendiri tidak tahu apa yang sedang kita rasakan. Kita hanya merasa ingin menangis atau diam saja.
+
+Jika berbicara terasa terlalu melelahkan, cobalah menulis. Menulis jurnal emosional atau yang sering disebut expressive writing adalah cara yang sangat aman untuk menuangkan apa saja yang berkecamuk di dalam dadamu tanpa takut dihakimi oleh siapa pun.
+
+Bagaimana cara memulainya secara alami?
+Tulis tanpa aturan. Cari kertas kosong atau buka fitur catatan privat. Tuliskan apa saja yang melintas di pikiranmu. Jangan khawatir tentang tanda baca, ejaan yang salah, atau kalimat yang tidak runtut. Tidak ada orang lain yang akan membaca tulisan ini selain dirimu sendiri.
+
+Ekspresikan segalanya secara jujur. Jika kamu merasa marah, kecewa, atau terluka, tuliskan semuanya. Katakan hal-hal yang tidak bisa kamu ucapkan langsung kepada orang lain di atas kertas tersebut.
+
+Proses menulis ini membantu memindahkan emosi yang abstrak dan berantakan dari dalam kepalamu menjadi bentuk kata-kata yang nyata. Begitu kamu melihat tulisan tersebut, otakmu akan lebih mudah memproses kesedihan itu dan perlahan melepaskannya.`
+    },
+    {
+      title: "Sleep Hygiene: Persiapan Pikiran untuk Istirahat Nyenyak",
+      category: "Kesehatan Tidur",
+      time: "5 menit baca",
+      icon: "💤",
+      color: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      intro: "Tidur bukan sekadar memejamkan mata. Kamar yang nyaman dan ritual sebelum tidur yang tenang adalah kunci kesegaran fisik dan mental esok hari.",
+      content: `Banyak dari kita yang menganggap tidur adalah aktivitas otomatis: berbaring, memejamkan mata, dan selesai. Namun, pernahkah kamu tidur selama delapan jam penuh tapi tetap merasa lelah saat bangun pagi? Itu terjadi karena kualitas tidurmu kurang baik.
+
+Tidur yang berkualitas adalah fondasi utama dari kesehatan mental kita. Kurang tidur membuat kita lebih mudah cemas, sensitif, dan sulit berkonsentrasi. Oleh karena itu, kita perlu mempraktikkan ritual tidur yang baik atau sleep hygiene.
+
+Langkah sederhana yang bisa kamu coba malam ini:
+Redupkan lampu kamar. Hindari cahaya terang satu jam sebelum tidur. Cahaya redup akan merangsang tubuhmu memproduksi melatonin, yaitu hormon alami yang membuatmu mengantuk.
+
+Matikan layar ponselmu. Pancaran cahaya biru dari layar ponsel menipu otakmu agar mengira hari masih siang. Cobalah untuk menjauhkan ponsel minimal tiga puluh menit sebelum kamu memejamkan mata.
+
+Ciptakan ritual penenang. Kamu bisa mandi air hangat, membaca buku fisik, mendengarkan musik lembut, atau minum segelas teh chamomile hangat sebelum tidur. Ritual ini menjadi sinyal bagi tubuhmu bahwa hari kerja telah usai dan saatnya beristirahat.`
+    },
+    {
+      title: "Membangun Kebiasaan Baru Tanpa Perlu Beban Mental",
+      category: "Psikologi Positif",
+      time: "4 menit baca",
+      icon: "🚶",
+      color: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      intro: "Ingin mulai berolahraga atau membaca buku setiap hari? Lupakan target besar yang bikin stres, mari mulai dari langkah sekecil mungkin.",
+      content: `Setiap awal tahun atau awal bulan, kita sering kali membuat resolusi besar seperti ingin berolahraga satu jam setiap hari atau membaca satu buku dalam seminggu. Namun, setelah beberapa hari berjalan, semangat kita biasanya memudar dan kita kembali ke kebiasaan lama. Mengapa ini sering terjadi?
+
+Alasannya adalah karena perubahan yang terlalu drastis menciptakan beban mental yang besar bagi otak. Otak kita secara alami menyukai kenyamanan dan membenci perubahan yang melelahkan. Jika targetmu terlalu besar, otak akan mencari seribu satu alasan untuk menundanya.
+
+Kuncinya adalah memulai dari langkah sekecil mungkin:
+Coba kebiasaan mikro. Alih-alih menargetkan olahraga satu jam, cobalah berkomitmen untuk melakukan push-up dua kali saja sehari atau jalan kaki lima menit. Alih-alih membaca satu bab buku, bacalah cukup satu halaman saja setiap malam.
+
+Kaitkan dengan rutinitas lama. Tempelkan kebiasaan baru ini setelah rutinitas yang sudah pasti kamu lakukan. Misalnya, setelah menyeduh kopi di pagi hari, kamu akan menulis satu kalimat rasa syukur di buku catatan.
+
+Terakhir, rayakan konsistensimu. Melakukan hal kecil secara konsisten jauh lebih baik daripada melakukan hal besar hanya sekali lalu berhenti. Berikan apresiasi kecil pada dirimu setiap kali kamu berhasil menjaga rutinitas mikromu.`
+    },
+    {
+      title: "Seni Berkata 'Tidak': Menjaga Kesehatan Mental dari Rasa Sungkan",
+      category: "Asertivitas",
+      time: "5 menit baca",
+      icon: "🛡️",
+      color: "bg-red-50 text-red-700 border-red-100",
+      intro: "Apakah kamu sering mengiyakan permintaan orang lain hanya karena merasa tidak enak, padahal energimu sudah habis? Mari belajar menetapkan batasan diri.",
+      content: `Apakah kamu tipe orang yang selalu berkata ya saat teman meminta bantuan, meskipun sebenarnya kamu sedang sangat lelah atau memiliki urusan penting sendiri? Menjadi orang yang baik dan suka membantu memang mulia. Namun, jika kamu terus-menerus mengorbankan kebutuhan dirimu demi menyenangkan orang lain, kamu sedang menuju kelelahan mental yang mendalam.
+
+Menolak permintaan orang lain bukan berarti kamu egois atau jahat. Itu adalah bentuk batasan diri atau boundaries yang sehat. Batasan diri membantu menjaga energimu agar tidak habis terkuras untuk hal-hal yang sebenarnya bukan tanggung jawabmu.
+
+Bagaimana cara berkata tidak dengan sopan tanpa merasa bersalah?
+Berikan penjelasan singkat. Kamu tidak perlu membuat alasan berbelit-belit yang terkesan mengada-ada. Cukup katakan secara jujur dan sopan, misalnya: terima kasih sudah memercayiku, tapi untuk saat ini jadwalku sedang sangat padat sehingga aku tidak bisa membantumu.
+
+Tawarkan alternatif lain jika memungkinkan. Jika kamu memang ingin membantu tapi tidak bisa saat ini, kamu bisa menawarkan opsi lain: aku tidak bisa mengerjakannya hari ini, tapi bagaimana jika aku bantu periksa besok sore?
+
+Pahami batas kapasitasmu. Ingatlah bahwa kamu tidak bisa membantu orang lain jika dirimu sendiri sedang dalam kondisi rapuh. Menjaga kesehatan mentalmu sendiri adalah prioritas utama sebelum kamu bisa menolong orang lain.`
+    },
+    {
+      title: "Menjadi Teman Terbaik bagi Diri Sendiri (Self-Compassion)",
+      category: "Psikologi Positif",
+      time: "5 menit baca",
+      icon: "💖",
+      color: "bg-indigo-50 text-indigo-700 border-indigo-100",
+      intro: "Mengapa kita sering kali berbicara sangat kasar pada diri sendiri saat gagal, padahal kita bisa bersikap sangat lembut kepada teman yang mengalami hal serupa?",
+      content: `Coba ingat-ingat kembali, apa yang biasanya kamu katakan pada dirimu sendiri saat kamu melakukan kesalahan kecil di tempat kerja atau kuliah? Apakah kalimat kasar seperti mengapa aku sebodoh ini melintas di kepalamu?
+
+Menariknya, jika teman dekatmu datang kepadamu dan menceritakan kesalahan yang sama, kamu pasti tidak akan mengucapkan kalimat kasar tersebut kepadanya. Kamu pasti akan menepuk pundaknya dan berkata hangat bahwa semuanya akan baik-baik saja dan berbuat salah adalah hal yang manusiawi.
+
+Lalu, mengapa kita bersikap begitu keras pada diri sendiri?
+Seni menyayangi diri sendiri, atau self-compassion, mengajak kita untuk memperlakukan diri sendiri dengan kelembutan yang sama seperti saat kita memperlakukan teman baik kita.
+
+Tiga langkah praktis untuk melatih kelembutan diri:
+Pertama, gunakan kelembutan diri. Alih-alih menghakimi diri sendiri saat gagal, cobalah berbicara dengan lembut. Katakan pada dirimu bahwa ini memang situasi yang sulit, tapi kamu sudah berusaha sebaik mungkin.
+
+Kedua, sadari kemanusiaan bersama. Ingatlah bahwa melakukan kesalahan dan merasakan kekecewaan adalah bagian dari pengalaman hidup setiap manusia. Kamu tidak sendirian; semua orang juga sedang berjuang menghadapi ketidaksempurnaannya masing-masing.
+
+Ketiga, latih kesadaran penuh. Sadari emosi negatifmu tanpa perlu tenggelam atau membesar-besarkannya. Amati rasa sedih atau kecewa itu, akui keberadaannya, dan biarkan ia berlalu secara perlahan dari pikiranmu.`
+    },
+    {
+      title: "Mengenal Burnout dan Kapan Kamu Harus Benar-benar Berhenti",
+      category: "Manajemen Stres",
+      time: "6 menit baca",
+      icon: "🔥",
+      color: "bg-red-50 text-red-700 border-red-100",
+      intro: "Kelelahan biasa bisa hilang dengan tidur semalaman. Namun, burnout membutuhkan penanganan emosional yang berbeda. Kenali tandanya sedini mungkin.",
+      content: `Ketika pekerjaan atau tugas kuliah terus mengalir tanpa henti, ada kalanya tubuh kita mulai memberikan sinyal-sinyal kelelahan. Awalnya mungkin hanya pegal-pegal biasa atau rasa kantuk. Namun, jika dibiarkan, kelelahan fisik ini bisa merembet menjadi kelelahan emosional yang luar biasa, sebuah kondisi yang kita kenal sebagai burnout.
+
+Burnout berbeda dengan kelelahan biasa. Jika kamu kelelahan setelah beraktivitas seharian, tidur nyenyak di malam hari biasanya cukup untuk memulihkan energimu. Namun, jika kamu mengalami burnout, tidur selama sepuluh jam pun tidak akan membuatmu merasa segar di pagi hari. Kamu akan tetap merasa kosong, tidak bersemangat, dan sinis terhadap pekerjaanmu.
+
+Bagaimana cara mengenali dan mengatasinya sebelum terlambat?
+Kenali gejala awalnya. Perhatikan jika kamu mulai merasa sangat malas membuka laptop, mudah tersinggung oleh hal-hal kecil, atau merasa pekerjaanmu tidak ada gunanya lagi. Ini adalah tanda bahwa pikiranmu sedang berteriak meminta jeda.
+
+Lakukan detoksifikasi tugas. Jika memungkinkan, delegasikan beberapa tugasmu atau bicarakan dengan atasan/dosen tentang kapasitas kerjamu saat ini. Jangan ragu untuk menetapkan batasan yang jelas antara waktu kerja dan waktu istirahat pribadi.
+
+Jadwalkan waktu istirahat yang tidak bisa diganggu gugat. Buat satu hari dalam seminggu di mana kamu benar-benar terlepas dari urusan pekerjaan atau tugas akademis. Gunakan hari itu untuk melakukan hobi, berjalan-jalan di alam terbuka, atau sekadar bermalas-malasan tanpa rasa bersalah.`
+    },
+    {
+      title: "Kekuatan Penerimaan Diri di Era Media Sosial yang Bising",
+      category: "Psikologi Positif",
+      time: "5 menit baca",
+      icon: "📱",
+      color: "bg-indigo-50 text-indigo-700 border-indigo-100",
+      intro: "Melihat kehidupan orang lain di layar ponsel sering kali memicu perasaan tertinggal. Mari belajar menavigasi diri di tengah riuhnya dunia digital.",
+      content: `Setiap kali kita membuka media sosial, kita disajikan dengan kurasi momen-momen terbaik dari kehidupan orang lain. Ada yang baru saja lulus, mendapatkan pekerjaan impian, bertunangan, atau berlibur ke tempat-tempat yang indah. Di satu sisi kita merasa senang, namun di sisi lain, perasaan tidak cukup baik kerap kali muncul secara diam-diam.
+
+Kita mulai membandingkan proses hidup kita yang berantakan dengan hasil akhir orang lain yang tampak sempurna di layar ponsel. Ingatlah bahwa apa yang kamu lihat di media sosial hanyalah sebuah cuplikan terbaik, bukan realitas kehidupan sehari-hari mereka yang sesungguhnya.
+
+Bagaimana menjaga kedamaian pikiranmu?
+Batasi waktu layar atau screen time. Cobalah pasang batas waktu harian untuk aplikasi media sosialmu. Luangkan waktu pagi hari tanpa langsung membuka ponsel agar pikiranmu tidak langsung dibombardir oleh informasi luar.
+
+Praktikkan kurasi konten secara sadar. Jangan ragu untuk menyembunyikan atau berhenti mengikuti akun-akun yang secara konsisten membuatmu merasa kurang percaya diri atau cemas. Ikuti akun-akun yang memberikan edukasi, inspirasi positif, atau humor yang menyehatkan pikiran.
+
+Fokus pada perjalananmu sendiri. Setiap orang memiliki garis waktu hidupnya masing-masing. Keberhasilan orang lain bukanlah indikator kegagalanmu. Bersyukurlah atas kemajuan kecil yang sudah kamu capai hari ini dibandingkan dirimu di masa lalu.`
+    },
+    {
+      title: "Kualitas Hubungan Sosial vs Kuantitas Teman Digital",
+      category: "Kesehatan Mental",
+      time: "5 menit baca",
+      icon: "👥",
+      color: "bg-indigo-50 text-indigo-700 border-indigo-100",
+      intro: "Memiliki ratusan pengikut di internet tidak menjamin kita bebas dari rasa kesepian. Yuk, pahami pentingnya koneksi nyata yang mendalam.",
+      content: `Kita hidup di era di mana kita bisa terhubung dengan ratusan atau bahkan ribuan orang hanya dalam satu ketukan jari. Kita memiliki teman di berbagai platform sosial, saling bertukar reaksi pada foto, dan memberikan komentar singkat. Namun secara paradoks, tingkat kesepian di era modern ini justru tercatat sebagai yang tertinggi dalam sejarah.
+
+Hal ini terjadi karena otak manusia tidak dirancang untuk memproses hubungan sosial dalam jumlah ribuan secara dangkal. Kita membutuhkan koneksi yang mendalam, tatap muka, dan rasa saling percaya yang nyata untuk merasa aman secara emosional.
+
+Langkah untuk membangun koneksi nyata:
+Utamakan kualitas daripada kuantitas. Memiliki dua atau tiga sahabat dekat yang benar-benar memahami dan mendukungmu jauh lebih berharga untuk kesehatan mental daripada memiliki ribuan pengikut yang tidak mengenalmu secara personal.
+
+Jadwalkan pertemuan tatap muka secara rutin. Sesekali, ajaklah teman dekatmu untuk minum kopi bersama, makan malam, atau sekadar berjalan-jalan sore tanpa sibuk memegang ponsel masing-masing. Kehadiran fisik memberikan kehangatan yang tidak bisa digantikan oleh teks digital.
+
+Latihlah empati dan pendengaran aktif. Saat temanmu bercerita, cobalah untuk benar-benar mendengarkan tanpa sibuk memikirkan apa tanggapan yang harus kamu berikan berikutnya. Terkadang, kehadiranmu yang fokus mendengarkan sudah lebih dari cukup untuk meringankan bebannya.`
+    },
+    {
+      title: "Menemukan Kedamaian dalam Keheningan Digital",
+      category: "Kesehatan Tidur",
+      time: "4 menit baca",
+      icon: "📴",
+      color: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      intro: "Kebisingan notifikasi ponsel secara terus-menerus bisa membuat sistem saraf kita kelelahan. Mari coba latihan detoks digital berkala.",
+      content: `Setiap hari, kita dikelilingi oleh kebisingan digital yang tiada henti. Notifikasi email pekerjaan, pesan grup yang terus masuk, berita viral, hingga video pendek yang dirancang untuk menarik perhatian kita selama berjam-jam. Tanpa disadari, kebisingan ini membuat sistem saraf kita berada dalam kondisi waspada secara konstan.
+
+Otak kita tidak pernah benar-benar beristirahat karena selalu ada informasi baru yang harus diproses. Akibatnya, kita menjadi mudah lelah, sulit berkonsentrasi, dan mengalami gangguan tidur.
+
+Bagaimana cara menciptakan ruang hening untuk pikiranmu?
+Lakukan detoksifikasi digital berkala. Cobalah tetapkan waktu khusus, misalnya setiap hari Minggu sore atau dua jam sebelum tidur, di mana kamu benar-benar mematikan ponsel atau mengaktifkan mode pesawat.
+
+Nikmati keheningan tanpa distraksi. Saat kamu sedang makan, berjalan kaki, atau mengantre, cobalah untuk tidak memegang ponsel. Biarkan pikiranmu melayang bebas, amati lingkungan sekitarmu, atau cukup nikmati keheningan sesaat tanpa merasa harus selalu produktif atau terhibur.
+
+Rasakan manfaat jangka panjangnya. Setelah melakukan detoks digital secara rutin, kamu akan merasakan pikiranmu menjadi lebih jernih, tingkat kecemasan menurun, dan kemampuanmu untuk menikmati momen saat ini akan meningkat secara drastis.`
+    }
+  ];
+
+  return (
+    <div className="max-w-6xl mx-auto space-y-8">
+      {/* Page Header */}
+      <div className="text-left">
+        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-slate-100 tracking-tight">
+          📚 Edukasi & Kesehatan Mental
+        </h1>
+        <p className="text-gray-500 dark:text-slate-400 mt-1">
+          Kumpulan artikel praktis yang ditulis dari hati ke hati untuk membantumu memahami diri sendiri.
+        </p>
+      </div>
+
+      {/* Articles Grid */}
+      <div className="grid md:grid-cols-2 gap-8">
+        {articles.map((item, index) => (
+          <div
+            key={index}
+            className="bg-white dark:bg-slate-950 rounded-3xl shadow-sm border border-gray-100 dark:border-slate-800 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-indigo-100"
+          >
+            <div>
+              <div className="flex justify-between items-center mb-4">
+                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${item.color}`}>
+                  {item.category}
+                </span>
+                <span className="text-xs text-gray-400 dark:text-slate-500 font-medium">
+                  ⏰ {item.time}
+                </span>
+              </div>
+
+              <div className="flex gap-3 items-start mb-3">
+                <span className="text-3xl select-none">{item.icon}</span>
+                <h2 className="text-lg font-bold text-gray-800 dark:text-slate-200 leading-snug hover:text-indigo-600 transition">
+                  {item.title}
+                </h2>
+              </div>
+
+              <p className="text-gray-500 dark:text-slate-450 text-sm leading-relaxed mb-6 font-normal">
+                {item.intro}
+              </p>
+            </div>
+
+            <button
+              onClick={() => setSelectedArticle(item)}
+              className="w-full bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-indigo-600 dark:text-indigo-400 font-bold py-3 px-4 rounded-xl transition duration-200 cursor-pointer text-center text-sm"
+            >
+              Baca Selengkapnya
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* Article Modal */}
+      {selectedArticle && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4 animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-slate-950 rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-y-auto shadow-2xl border border-gray-100 dark:border-slate-800 relative p-8 transition-colors duration-200">
+            <button
+              onClick={() => setSelectedArticle(null)}
+              className="absolute top-5 right-5 text-gray-400 hover:text-gray-600 text-2xl font-bold bg-gray-100 dark:bg-slate-900 rounded-full w-10 h-10 flex items-center justify-center cursor-pointer"
+            >
+              ×
+            </button>
+
+            {/* Modal Header */}
+            <div className="mb-6">
+              <span className={`inline-block text-xs font-bold px-3 py-1.5 rounded-xl border mb-3 ${selectedArticle.color}`}>
+                {selectedArticle.category}
+              </span>
+              <h2 className="text-2xl font-extrabold text-gray-900 dark:text-slate-100 leading-snug flex items-center gap-2.5">
+                <span className="text-3xl select-none">{selectedArticle.icon}</span>
+                {selectedArticle.title}
+              </h2>
+              <div className="flex gap-4 items-center mt-3 text-xs text-gray-400 dark:text-slate-500 font-medium border-b border-gray-100 dark:border-slate-900 pb-4">
+                <span>⏰ Durasi: {selectedArticle.time}</span>
+                <span>•</span>
+                <span>Topik: Psikologi Terapan</span>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="text-gray-650 dark:text-slate-300 text-sm leading-relaxed whitespace-pre-line space-y-4 font-normal">
+              {selectedArticle.content}
+            </div>
+
+            {/* Modal Footer */}
+            <div className="mt-8 pt-6 border-t border-gray-100 dark:border-slate-900 flex justify-end">
+              <button
+                onClick={() => setSelectedArticle(null)}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-6 rounded-xl transition duration-200 cursor-pointer text-sm shadow-md"
+              >
+                Selesai Membaca
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
