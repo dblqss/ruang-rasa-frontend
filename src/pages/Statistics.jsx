@@ -43,41 +43,29 @@ export default function Statistics() {
 
   const getMoodColor = (moodName) => {
     const name = moodName.toLowerCase();
-    if (name.includes("sangat bahagia") || name.includes("bahagia")) {
-      return "#846044"; // Terracotta Brown
-    }
-    if (name.includes("bersyukur") || name.includes("syukur")) {
-      return "#98A086"; // Sage Green
-    }
-    if (name.includes("semangat") || name.includes("produktif")) {
-      return "#C4A071"; // Golden Tan
-    }
-    if (name.includes("tenang") || name.includes("damai")) {
-      return "#b1bc9e"; // Light Olive/Sage
-    }
-    if (name.includes("biasa")) {
-      return "#dfccb1"; // Warm Beige
-    }
-    if (name.includes("cemas") || name.includes("khawatir") || name.includes("stres")) {
-      return "#A76D5E"; // Dusty Rose
-    }
-    if (name.includes("marah") || name.includes("kesal")) {
-      return "#bd4f3c"; // Brick Red/Muted Rust
-    }
-    if (name.includes("sedih") || name.includes("kecewa") || name.includes("sepi")) {
-      return "#70594a"; // Muted Cocoa Brown
-    }
-    if (name.includes("lelah") || name.includes("ngantuk") || name.includes("bosan")) {
-      return "#a4ac86"; // Muted Greenish Earth
-    }
+    
+    // Explicit color mapping for standard moods (earthy/cozy, high contrast, no duplicates)
+    if (name.includes("sangat bahagia")) return "#F59E0B"; // Warm Gold/Amber
+    if (name.includes("bahagia")) return "#D97706"; // Amber Orange
+    if (name.includes("bersyukur") || name.includes("syukur")) return "#10B981"; // Emerald Green
+    if (name.includes("semangat") || name.includes("produktif")) return "#EC4899"; // Vibrant Rose
+    if (name.includes("tenang") || name.includes("damai")) return "#06B6D4"; // Ocean Cyan/Teal
+    if (name.includes("biasa")) return "#6B7280"; // Cool Slate Gray
+    if (name.includes("cemas") || name.includes("khawatir") || name.includes("stres")) return "#6366F1"; // Indigo Blue
+    if (name.includes("marah") || name.includes("kesal")) return "#EF4444"; // Crimson Red
+    if (name.includes("sedih") || name.includes("kecewa") || name.includes("sepi")) return "#3B82F6"; // Royal Blue
+    if (name.includes("lelah") || name.includes("ngantuk") || name.includes("bosan")) return "#7C3AED"; // Violet Purple
 
-    // Dynamic hashed color fallback using our earth tone values
+    // Dynamic fallback using highly distinct pastel/earthy tones
     let hash = 0;
     for (let i = 0; i < name.length; i++) {
       hash = name.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const colors = ["#846044", "#98A086", "#C4A071", "#b1bc9e", "#dfccb1", "#A76D5E", "#bd4f3c", "#70594a", "#a4ac86"];
-    return colors[Math.abs(hash) % colors.length];
+    const distinctColors = [
+      "#F59E0B", "#10B981", "#EC4899", "#06B6D4", "#6366F1",
+      "#7C3AED", "#EF4444", "#3B82F6", "#D97706", "#6B7280"
+    ];
+    return distinctColors[Math.abs(hash) % distinctColors.length];
   };
 
   const totalLogs = distribution.reduce((sum, item) => sum + item.total, 0);
@@ -87,10 +75,37 @@ export default function Statistics() {
       return "Belum ada catatan emosi yang terekam di sistem. Silakan isi mood harianmu di menu 'Mood Hari Ini' agar konselor virtual kami dapat memetakan kestabilan emosi dan memberikan rangkuman analisis pola pikiranmu secara lengkap.";
     }
 
-    const topMoodItem = [...distribution].sort((a, b) => b.total - a.total)[0];
-    const topMoodName = topMoodItem.mood_name;
-    const topMoodPercentage = Math.round((topMoodItem.total / totalLogs) * 100);
+    const maxTotal = Math.max(...distribution.map(item => item.total));
+    const topMoods = distribution.filter(item => item.total === maxTotal);
+    const topMoodPercentage = Math.round((maxTotal / totalLogs) * 100);
 
+    if (topMoods.length > 1) {
+      // Handle TIE case
+      const moodNames = topMoods.map(item => item.mood_name).join(", ").replace(/, ([^,]*)$/, " dan $1");
+      
+      const hasPositive = topMoods.some(item => {
+        const name = item.mood_name.toLowerCase();
+        return name.includes("bahagia") || name.includes("tenang") || name.includes("syukur") || name.includes("semangat");
+      });
+      const hasNegative = topMoods.some(item => {
+        const name = item.mood_name.toLowerCase();
+        return name.includes("cemas") || name.includes("stres") || name.includes("marah") || name.includes("sedih") || name.includes("lelah");
+      });
+
+      let dynamicAdvice = "";
+      if (hasPositive && !hasNegative) {
+        dynamicAdvice = "Ini adalah pola emosi yang sangat sehat. Pikiran Anda berada dalam keadaan seimbang dan dipenuhi oleh berbagai emosi positif secara merata. Pertahankan kestabilan ini dengan konsisten menulis jurnal harian.";
+      } else if (!hasPositive && hasNegative) {
+        dynamicAdvice = "Data menunjukkan Anda sedang mengalami beberapa tekanan emosi negatif secara bersamaan. Konselor menyarankan Anda untuk mengambil jeda sejenak dari rutinitas harian, melakukan relaksasi pernapasan 4-7-8, dan menceritakan apa yang mengganjal pikiran Anda di menu 'Cerita Yuk'.";
+      } else {
+        dynamicAdvice = "Ini menunjukkan dinamika emosi yang aktif, di mana perasaan positif dan negatif Anda berinteraksi secara seimbang. Merasa lelah atau cemas di samping bersyukur adalah hal yang wajar. Fokuslah pada hal-hal kecil yang bisa Anda kendalikan hari ini.";
+      }
+
+      return `Analisis menunjukkan bahwa tidak ada satu emosi tunggal yang mendominasi; perasaanmu tersebar secara seimbang di beberapa emosi utama yaitu ${moodNames}, masing-masing menyumbang ${topMoodPercentage}% dari total catatanmu. ${dynamicAdvice}`;
+    }
+
+    const topMoodItem = topMoods[0];
+    const topMoodName = topMoodItem.mood_name;
     const nameLower = topMoodName.toLowerCase();
     if (nameLower.includes("bahagia") || nameLower.includes("tenang") || nameLower.includes("syukur")) {
       return `Analisis menunjukkan bahwa emosi yang paling dominan kamu rasakan adalah ${topMoodName} dengan kontribusi sebesar ${topMoodPercentage}% dari keseluruhan catatanmu. Ini adalah tanda yang sangat baik, menunjukkan bahwa pikiranmu sedang berada dalam fase yang stabil, damai, dan penuh penerimaan diri. Untuk mempertahankan kondisi positif ini, cobalah untuk tetap konsisten menulis jurnal refleksi harian, membagikan energi positifmu ke lingkungan sosial, dan merayakan pencapaian-pencapaian kecil setiap hari sebagai apresiasi terhadap dirimu sendiri.`;
