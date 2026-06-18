@@ -75,7 +75,7 @@ function Login() {
             </label>
             <input
               type="email"
-              placeholder="nama@email.com"
+              placeholder="silahkan masukkan email anda"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
@@ -90,7 +90,7 @@ function Login() {
             </div>
             <input
               type="password"
-              placeholder="••••••••"
+              placeholder="silahkan masukkan password anda"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"

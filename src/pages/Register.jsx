@@ -95,7 +95,7 @@ function Register() {
             </label>
             <input
               type="email"
-              placeholder="nama@email.com"
+              placeholder="silahkan masukkan email anda"
               value={form.email}
               onChange={(e) =>
                 setForm({
@@ -113,7 +113,7 @@ function Register() {
             </label>
             <input
               type="password"
-              placeholder="Minimal 6 karakter"
+              placeholder="silahkan masukkan password anda"
               value={form.password}
               onChange={(e) =>
                 setForm({
