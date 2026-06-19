@@ -198,12 +198,6 @@ function Register() {
                 />
               </div>
 
-              {debugCode && (
-                <div className="bg-emerald-50 border border-emerald-100 p-3.5 rounded-2xl text-xs text-emerald-800 text-center font-semibold">
-                  [Debug Mode] Kode verifikasi Anda: <span className="underline select-all font-mono text-sm">{debugCode}</span>
-                </div>
-              )}
-
               <div className="flex gap-3 mt-6">
                 <button
                   type="button"

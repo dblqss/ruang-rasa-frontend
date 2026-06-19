@@ -8,7 +8,7 @@ export const translations = {
     menuStatistics: "Statistik",
     menuChat: "Cerita Yuk",
     menuActivities: "Aktivitas",
-    menuEducation: "Edukasi",
+    menuEducation: "Baca Yuk",
     menuProfile: "Profil",
     logoutBtn: "Keluar Akun",
 
@@ -171,7 +171,7 @@ export const translations = {
     menuStatistics: "Statistics",
     menuChat: "Chat Room",
     menuActivities: "Activities",
-    menuEducation: "Education",
+    menuEducation: "Read Articles",
     menuProfile: "Profile",
     logoutBtn: "Sign Out",
 

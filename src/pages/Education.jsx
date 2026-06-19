@@ -2,6 +2,9 @@ import { useState } from "react";
 
 export default function Education() {
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Semua");
+  const [sortBy, setSortBy] = useState("default");
 
   const articles = [
     {
@@ -315,56 +318,155 @@ Rasakan manfaat jangka panjangnya. Setelah melakukan detoks digital secara rutin
     }
   ];
 
+  const categories = ["Semua", ...new Set(articles.map(art => art.category))];
+
+  const filteredArticles = articles
+    .filter(art => {
+      const matchesCategory = selectedCategory === "Semua" || art.category === selectedCategory;
+      const matchesSearch = art.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                            art.intro.toLowerCase().includes(searchTerm.toLowerCase());
+      return matchesCategory && matchesSearch;
+    })
+    .sort((a, b) => {
+      if (sortBy === "title-asc") {
+        return a.title.localeCompare(b.title);
+      }
+      if (sortBy === "title-desc") {
+        return b.title.localeCompare(a.title);
+      }
+      if (sortBy === "time-asc") {
+        const timeA = parseInt(a.time) || 0;
+        const timeB = parseInt(b.time) || 0;
+        return timeA - timeB;
+      }
+      if (sortBy === "time-desc") {
+        const timeA = parseInt(a.time) || 0;
+        const timeB = parseInt(b.time) || 0;
+        return timeB - timeA;
+      }
+      return 0;
+    });
+
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Page Header */}
-      <div className="text-left">
-        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-slate-100 tracking-tight">
-          📚 Edukasi & Kesehatan Mental
-        </h1>
-        <p className="text-gray-500 dark:text-slate-400 mt-1">
-          Kumpulan artikel praktis yang ditulis dari hati ke hati untuk membantumu memahami diri sendiri.
-        </p>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-gray-100 dark:border-slate-800/80">
+        <div className="text-left space-y-1">
+          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-slate-100 tracking-tight flex items-center gap-3">
+            <span className="text-4xl select-none">📖</span> Baca Yuk
+          </h1>
+          <p className="text-sm text-gray-500 dark:text-slate-400 max-w-xl">
+            Kumpulan artikel praktis yang ditulis dari hati ke hati untuk membantumu memahami diri sendiri dan menjaga kesehatan mental.
+          </p>
+        </div>
+      </div>
+
+      {/* Filters & Search Controls */}
+      <div className="bg-white/60 dark:bg-slate-900/50 backdrop-blur-md p-6 rounded-3xl border border-gray-100 dark:border-slate-800/60 shadow-sm space-y-5">
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+          {/* Search Input */}
+          <div className="relative w-full sm:max-w-md">
+            <span className="absolute inset-y-0 left-4 flex items-center text-gray-400 select-none">🔍</span>
+            <input
+              type="text"
+              placeholder="Cari judul artikel atau kata kunci..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-11 pr-4 py-3 rounded-2xl border border-gray-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 text-sm transition-all placeholder:text-gray-400"
+            />
+            {searchTerm && (
+              <button 
+                onClick={() => setSearchTerm("")}
+                className="absolute inset-y-0 right-4 flex items-center text-gray-400 hover:text-gray-600 cursor-pointer"
+              >
+                ×
+              </button>
+            )}
+          </div>
+
+          {/* Sort Dropdown */}
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <label className="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider whitespace-nowrap">Urutkan:</label>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="border border-gray-200 dark:border-slate-800 px-4 py-3 rounded-2xl bg-white/80 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 text-sm cursor-pointer"
+            >
+              <option value="default">Rekomendasi</option>
+              <option value="title-asc">Judul (A-Z)</option>
+              <option value="title-desc">Judul (Z-A)</option>
+              <option value="time-asc">Waktu Baca (Tercepat)</option>
+              <option value="time-desc">Waktu Baca (Terlama)</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Category Pills */}
+        <div className="space-y-2">
+          <label className="block text-xs font-bold text-gray-400 dark:text-slate-500 uppercase tracking-wider">Kategori Topik</label>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setSelectedCategory(cat)}
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer border ${
+                  selectedCategory === cat
+                    ? "bg-indigo-600 text-white border-indigo-650 shadow-md shadow-indigo-150/10 dark:shadow-none"
+                    : "bg-white dark:bg-slate-900 text-gray-655 dark:text-slate-400 border-gray-200 dark:border-slate-800 hover:bg-gray-50 dark:hover:bg-slate-800/80 hover:text-gray-900 dark:hover:text-slate-200"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Articles Grid */}
-      <div className="grid md:grid-cols-2 gap-8">
-        {articles.map((item, index) => (
-          <div
-            key={index}
-            className="bg-white dark:bg-slate-950 rounded-3xl shadow-sm border border-gray-100 dark:border-slate-800 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-indigo-100"
-          >
-            <div>
-              <div className="flex justify-between items-center mb-4">
-                <span className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${item.color}`}>
-                  {item.category}
-                </span>
-                <span className="text-xs text-gray-400 dark:text-slate-500 font-medium">
-                  ⏰ {item.time}
-                </span>
-              </div>
-
-              <div className="flex gap-3 items-start mb-3">
-                <span className="text-3xl select-none">{item.icon}</span>
-                <h2 className="text-lg font-bold text-gray-800 dark:text-slate-200 leading-snug hover:text-indigo-600 transition">
-                  {item.title}
-                </h2>
-              </div>
-
-              <p className="text-gray-500 dark:text-slate-450 text-sm leading-relaxed mb-6 font-normal">
-                {item.intro}
-              </p>
-            </div>
-
-            <button
-              onClick={() => setSelectedArticle(item)}
-              className="w-full bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-indigo-600 dark:text-indigo-400 font-bold py-3 px-4 rounded-xl transition duration-200 cursor-pointer text-center text-sm"
+      {filteredArticles.length === 0 ? (
+        <div className="text-center py-12 bg-white dark:bg-slate-950 rounded-3xl border border-gray-100 dark:border-slate-850/80">
+          <span className="text-4xl block mb-3">🔍</span>
+          <p className="text-sm font-bold text-gray-500 dark:text-slate-400">Tidak ada artikel yang cocok dengan filter atau kata kunci Anda.</p>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 gap-8">
+          {filteredArticles.map((item, index) => (
+            <div
+              key={index}
+              className="bg-white dark:bg-slate-950 rounded-3xl shadow-sm border border-gray-100 dark:border-slate-800 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:border-indigo-100"
             >
-              Baca Selengkapnya
-            </button>
-          </div>
-        ))}
-      </div>
+              <div>
+                <div className="flex justify-between items-center mb-4">
+                  <span className={`text-xs font-bold px-3 py-1.5 rounded-xl border ${item.color}`}>
+                    {item.category}
+                  </span>
+                  <span className="text-xs text-gray-400 dark:text-slate-500 font-medium">
+                    ⏰ {item.time}
+                  </span>
+                </div>
+
+                <div className="flex gap-3 items-start mb-3">
+                  <span className="text-3xl select-none">{item.icon}</span>
+                  <h2 className="text-lg font-bold text-gray-800 dark:text-slate-200 leading-snug hover:text-indigo-650 transition">
+                    {item.title}
+                  </h2>
+                </div>
+
+                <p className="text-gray-550 dark:text-slate-450 text-sm leading-relaxed mb-6 font-normal">
+                  {item.intro}
+                </p>
+              </div>
+
+              <button
+                onClick={() => setSelectedArticle(item)}
+                className="w-full bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900 text-indigo-600 dark:text-indigo-400 font-bold py-3 px-4 rounded-xl transition duration-200 cursor-pointer text-center text-sm"
+              >
+                Baca Selengkapnya
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Article Modal */}
       {selectedArticle && (

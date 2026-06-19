@@ -308,7 +308,24 @@ export default function Profile() {
   };
 
   const loadSavedAccounts = () => {
-    setSavedAccounts(JSON.parse(localStorage.getItem("app-saved-accounts") || "[]"));
+    const currentToken = localStorage.getItem("token");
+    const currentUserStr = localStorage.getItem("user");
+    const accountsStr = localStorage.getItem("app-saved-accounts") || "[]";
+    let accounts = JSON.parse(accountsStr);
+
+    if (currentUserStr && currentToken) {
+      const currentUser = JSON.parse(currentUserStr);
+      const exists = accounts.some(acc => acc.email === currentUser.email);
+      if (!exists) {
+        accounts.push({
+          email: currentUser.email,
+          name: currentUser.name,
+          token: currentToken
+        });
+        localStorage.setItem("app-saved-accounts", JSON.stringify(accounts));
+      }
+    }
+    setSavedAccounts(accounts);
   };
 
   useEffect(() => {
@@ -963,12 +980,6 @@ export default function Profile() {
                       />
                     </div>
 
-                    {addDebugCode && (
-                      <div className="bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-100/40 dark:border-emerald-900/30 p-3.5 rounded-2xl text-xs text-emerald-800 dark:text-emerald-400 text-center font-semibold">
-                        [Debug Mode] Kode verifikasi Anda: <span className="underline select-all font-mono text-sm">{addDebugCode}</span>
-                      </div>
-                    )}
-
                     <div className="flex gap-3">
                       <button
                         type="button"
@@ -1037,6 +1048,15 @@ export default function Profile() {
                               <p className="text-[10px] text-gray-455 dark:text-slate-500 truncate pr-2">{acc.email}</p>
                             </div>
                           </div>
+                          {!isCurrent && (
+                            <button
+                              onClick={(e) => handleRemoveAccount(acc.email, e)}
+                              className="text-xs bg-red-50 dark:bg-red-950/20 hover:bg-red-100 dark:hover:bg-red-900/40 text-red-650 dark:text-red-400 p-2 rounded-xl transition duration-150 cursor-pointer flex items-center justify-center font-bold"
+                              title={language === "en" ? "Remove account" : "Hapus akun"}
+                            >
+                              ❌
+                            </button>
+                          )}
                         </div>
                       );
                     })}
