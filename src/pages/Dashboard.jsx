@@ -392,7 +392,7 @@ export default function Dashboard() {
                 {breathPhase === "hold" && (lang === "en" ? "Hold your breath calmly... 🧘 (7 seconds)" : "Tahan napasmu dengan tenang... 🧘 (7 detik)")}
                 {breathPhase === "exhale" && (lang === "en" ? "Exhale slowly... 🍃 (8 seconds)" : "Hembuskan napas perlahan... 🍃 (8 detik)")}
                 {breathPhase === "done" && (lang === "en" ? "Done! Your body now feels more relaxed. ✨" : "Selesai! Tubuhmu kini terasa lebih rileks. ✨")}
-                {breathPhase === "idle" && (lang === "en" ? "Tap the button below to start 🌬️" : "Ketuk tombol di bawah untuk mulai 🌬️")}
+                {breathPhase === "idle" && (lang === "en" ? "Tap the button above to start 🌬️" : "Ketuk tombol di atas untuk mulai 🌬️")}
               </p>
             </div>
           </div>
