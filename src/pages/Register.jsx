@@ -11,11 +11,7 @@ function Register() {
     password: "",
   });
   const [loading, setLoading] = useState(false);
-  const [showVerification, setShowVerification] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
-  const [debugCode, setDebugCode] = useState("");
-
-  const handleSendCode = async (e) => {
+  const register = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.password) {
       alert("Semua field harus diisi!");
@@ -32,33 +28,7 @@ function Register() {
 
     try {
       setLoading(true);
-      const response = await axios.post("/register/send-code", form);
-      setShowVerification(true);
-      if (response.data.debug_code) {
-        setDebugCode(response.data.debug_code);
-      }
-      alert("Kode verifikasi telah dikirim ke email Gmail Anda. Silakan periksa kotak masuk/spam Anda.");
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || "Gagal mengirim kode verifikasi, silakan coba lagi.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const register = async (e) => {
-    e.preventDefault();
-    if (!verificationCode) {
-      alert("Kode verifikasi wajib diisi!");
-      return;
-    }
-
-    try {
-      setLoading(true);
-      const response = await axios.post("/register", {
-        ...form,
-        code: verificationCode
-      });
+      const response = await axios.post("/register", form);
 
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -78,7 +48,7 @@ function Register() {
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Registrasi gagal, silakan periksa kode verifikasi Anda.");
+      alert(err.response?.data?.message || "Registrasi gagal, silakan coba lagi dengan data lain.");
     } finally {
       setLoading(false);
     }
@@ -107,119 +77,72 @@ function Register() {
         </div>
 
         {/* Register Form */}
-        <form onSubmit={showVerification ? register : handleSendCode} className="space-y-5">
-          {!showVerification ? (
-            <>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-                  Nama Lengkap
-                </label>
-                <input
-                  type="text"
-                  placeholder="Nama Anda"
-                  value={form.name}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      name: e.target.value,
-                    })
-                  }
-                  className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
-                />
-              </div>
+        <form onSubmit={register} className="space-y-5">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
+              Nama Lengkap
+            </label>
+            <input
+              type="text"
+              placeholder="Nama Anda"
+              value={form.name}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  name: e.target.value,
+                })
+              }
+              className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
+            />
+          </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  placeholder="silahkan masukkan email Gmail Anda (contoh@gmail.com)"
-                  value={form.email}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      email: e.target.value,
-                    })
-                  }
-                  className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
-                />
-              </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
+              Email
+            </label>
+            <input
+              type="email"
+              placeholder="silahkan masukkan email Gmail Anda (contoh@gmail.com)"
+              value={form.email}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  email: e.target.value,
+                })
+              }
+              className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
+            />
+          </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  placeholder="silahkan masukkan password anda"
-                  value={form.password}
-                  onChange={(e) =>
-                    setForm({
-                      ...form,
-                      password: e.target.value,
-                    })
-                  }
-                  className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
-                />
-              </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
+              Password
+            </label>
+            <input
+              type="password"
+              placeholder="silahkan masukkan password anda"
+              value={form.password}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  password: e.target.value,
+                })
+              }
+              className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
+            />
+          </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold py-3.5 rounded-2xl transition duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer flex justify-center items-center mt-6"
-              >
-                {loading ? (
-                  <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                ) : (
-                  "Kirim Kode Verifikasi"
-                )}
-              </button>
-            </>
-          ) : (
-            <>
-              <div className="bg-indigo-50/50 border border-indigo-100 p-4 rounded-2xl text-xs text-indigo-850 space-y-1">
-                <p><strong>Nama:</strong> {form.name}</p>
-                <p><strong>Email:</strong> {form.email}</p>
-                <p className="mt-2 text-gray-500">Kode verifikasi dikirim ke email Gmail di atas.</p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-                  Kode Verifikasi (OTP)
-                </label>
-                <input
-                  type="text"
-                  maxLength={6}
-                  placeholder="Masukkan 6 digit kode"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                  className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400 text-center tracking-widest font-mono text-lg font-bold"
-                />
-              </div>
-
-              <div className="flex gap-3 mt-6">
-                <button
-                  type="button"
-                  onClick={() => setShowVerification(false)}
-                  className="w-1/3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 rounded-2xl transition duration-300 focus:outline-none cursor-pointer flex justify-center items-center text-sm"
-                >
-                  Kembali
-                </button>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold py-3.5 rounded-2xl transition duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer flex justify-center items-center text-sm"
-                >
-                  {loading ? (
-                    <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                  ) : (
-                    "Verifikasi & Daftar"
-                  )}
-                </button>
-              </div>
-            </>
-          )}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold py-3.5 rounded-2xl transition duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer flex justify-center items-center mt-6"
+          >
+            {loading ? (
+              <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            ) : (
+              "Daftar Sekarang"
+            )}
+          </button>
         </form>
 
         {/* Footer Link */}

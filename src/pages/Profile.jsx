@@ -221,7 +221,7 @@ export default function Profile() {
     }
   };
 
-  const handleAddAccountSendCode = async (e) => {
+  const handleAddAccount = async (e) => {
     e.preventDefault();
     if (!addName || !addEmail || !addPassword) {
       alert(t("valAllFields"));
@@ -238,39 +238,10 @@ export default function Profile() {
 
     try {
       setLoading(true);
-      const res = await api.post("/register/send-code", {
-        name: addName,
-        email: addEmail,
-        password: addPassword,
-      });
-
-      setShowAddVerification(true);
-      if (res.data.debug_code) {
-        setAddDebugCode(res.data.debug_code);
-      }
-      alert(language === "en" ? "Verification code has been sent to your Gmail!" : "Kode verifikasi telah dikirim ke email Gmail Anda!");
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.message || (language === "en" ? "Failed to send verification code." : "Gagal mengirim kode verifikasi."));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleAddAccount = async (e) => {
-    e.preventDefault();
-    if (!addVerificationCode) {
-      alert(language === "en" ? "Verification code is required!" : "Kode verifikasi wajib diisi!");
-      return;
-    }
-
-    try {
-      setLoading(true);
       const res = await api.post("/register", {
         name: addName,
         email: addEmail,
         password: addPassword,
-        code: addVerificationCode
       });
 
       // Switch authentication tokens to switch account
@@ -906,98 +877,53 @@ export default function Profile() {
                 <p className="text-xs text-gray-400 dark:text-slate-500 mt-1">{t("addAccountSub")}</p>
               </div>
 
-              <form onSubmit={showAddVerification ? handleAddAccount : handleAddAccountSendCode} className="space-y-5">
-                {!showAddVerification ? (
-                  <>
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-slate-355 mb-1.5 ml-1">
-                        {t("fullName")}
-                      </label>
-                      <input
-                        type="text"
-                        placeholder={language === "en" ? "New account name" : "Nama akun baru"}
-                        value={addName}
-                        onChange={(e) => setAddName(e.target.value)}
-                        className="w-full border border-gray-200 dark:border-slate-800 p-3.5 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 transition text-sm"
-                      />
-                    </div>
+              <form onSubmit={handleAddAccount} className="space-y-5">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-slate-355 mb-1.5 ml-1">
+                    {t("fullName")}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder={language === "en" ? "New account name" : "Nama akun baru"}
+                    value={addName}
+                    onChange={(e) => setAddName(e.target.value)}
+                    className="w-full border border-gray-200 dark:border-slate-800 p-3.5 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 transition text-sm"
+                  />
+                </div>
 
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-slate-355 mb-1.5 ml-1">
-                        {t("emailAddr")}
-                      </label>
-                      <input
-                        type="email"
-                        placeholder={language === "en" ? "new@email.com" : "email@baru.com"}
-                        value={addEmail}
-                        onChange={(e) => setAddEmail(e.target.value)}
-                        className="w-full border border-gray-200 dark:border-slate-800 p-3.5 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 transition text-sm"
-                      />
-                    </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-slate-355 mb-1.5 ml-1">
+                    {t("emailAddr")}
+                  </label>
+                  <input
+                    type="email"
+                    placeholder={language === "en" ? "new@email.com" : "email@baru.com"}
+                    value={addEmail}
+                    onChange={(e) => setAddEmail(e.target.value)}
+                    className="w-full border border-gray-200 dark:border-slate-800 p-3.5 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 transition text-sm"
+                  />
+                </div>
 
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-slate-355 mb-1.5 ml-1">
-                        Password
-                      </label>
-                      <input
-                        type="password"
-                        placeholder={language === "en" ? "Minimum 6 characters" : "Minimal 6 karakter"}
-                        value={addPassword}
-                        onChange={(e) => setAddPassword(e.target.value)}
-                        className="w-full border border-gray-200 dark:border-slate-800 p-3.5 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 transition text-sm"
-                      />
-                    </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 dark:text-slate-355 mb-1.5 ml-1">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    placeholder={language === "en" ? "Minimum 6 characters" : "Minimal 6 karakter"}
+                    value={addPassword}
+                    onChange={(e) => setAddPassword(e.target.value)}
+                    className="w-full border border-gray-200 dark:border-slate-800 p-3.5 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 transition text-sm"
+                  />
+                </div>
 
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-6 rounded-2xl transition duration-200 shadow-md hover:shadow-lg cursor-pointer text-sm"
-                    >
-                      {loading ? (language === "en" ? "Sending Code..." : "Mengirim Kode...") : (language === "en" ? "Send Verification Code" : "Kirim Kode Verifikasi")}
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <div className="bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100/40 dark:border-indigo-900/30 p-4 rounded-2xl text-xs text-indigo-800 dark:text-indigo-400 space-y-1">
-                      <p><strong>{t("fullName")}:</strong> {addName}</p>
-                      <p><strong>{t("emailAddr")}:</strong> {addEmail}</p>
-                      <p className="mt-2 text-gray-500 dark:text-slate-400">
-                        {language === "en" ? "Verification code was sent to the Gmail address above." : "Kode verifikasi telah dikirim ke email Gmail di atas."}
-                      </p>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-slate-355 mb-1.5 ml-1">
-                        {language === "en" ? "Verification Code (OTP)" : "Kode Verifikasi (OTP)"}
-                      </label>
-                      <input
-                        type="text"
-                        maxLength={6}
-                        placeholder={language === "en" ? "Enter 6-digit code" : "Masukkan 6 digit kode"}
-                        value={addVerificationCode}
-                        onChange={(e) => setAddVerificationCode(e.target.value)}
-                        className="w-full border border-gray-200 dark:border-slate-800 p-3.5 rounded-2xl bg-white dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:text-slate-200 transition text-sm text-center tracking-widest font-mono text-lg font-bold"
-                      />
-                    </div>
-
-                    <div className="flex gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setShowAddVerification(false)}
-                        className="bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 font-bold py-3.5 px-6 rounded-2xl transition duration-200 cursor-pointer text-sm"
-                      >
-                        {language === "en" ? "Back" : "Kembali"}
-                      </button>
-                      <button
-                        type="submit"
-                        disabled={loading}
-                        className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-6 rounded-2xl transition duration-200 shadow-md hover:shadow-lg cursor-pointer text-sm"
-                      >
-                        {loading ? (language === "en" ? "Adding..." : "Menambahkan...") : t("addAccountBtn")}
-                      </button>
-                    </div>
-                  </>
-                )}
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3.5 px-6 rounded-2xl transition duration-200 shadow-md hover:shadow-lg cursor-pointer text-sm"
+                >
+                  {loading ? (language === "en" ? "Adding..." : "Menambahkan...") : t("addAccountBtn")}
+                </button>
               </form>
             </div>
           )}
