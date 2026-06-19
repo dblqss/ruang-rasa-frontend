@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "../api/axios";
-import { translations } from "../utils/translations";
+import { translations, translateMoodName, translateActivityText } from "../utils/translations";
 
 export default function Activities() {
   const [lang, setLang] = useState(localStorage.getItem("app-lang") || "id");
@@ -245,7 +245,7 @@ export default function Activities() {
         </div>
         <div className="bg-indigo-50/70 dark:bg-indigo-950/20 border border-indigo-100/40 dark:border-indigo-900/30 px-4 py-2 rounded-2xl flex items-center gap-2">
           <span className="text-xs text-indigo-600 dark:text-indigo-400 font-bold uppercase tracking-wider">{t("currentMood")}</span>
-          <span className="text-indigo-800 dark:text-indigo-200 font-extrabold bg-white dark:bg-slate-900 px-2.5 py-0.5 rounded-lg text-xs shadow-sm border border-gray-50 dark:border-slate-800">{mood.name}</span>
+          <span className="text-indigo-850 dark:text-indigo-200 font-extrabold bg-white dark:bg-slate-900 px-2.5 py-0.5 rounded-lg text-xs shadow-sm border border-gray-50 dark:border-slate-800">{translateMoodName(mood.name, lang)}</span>
         </div>
       </div>
 
@@ -318,12 +318,12 @@ export default function Activities() {
                           <div className="flex items-center gap-2">
                             <span className="text-2xl select-none">{activity.icon || "✨"}</span>
                             <h3 className={`text-base font-extrabold ${isDone ? "text-gray-450 dark:text-slate-500 line-through" : "text-gray-800 dark:text-slate-200"}`}>
-                              {activity.title}
+                              {translateActivityText(activity.title, lang)}
                             </h3>
                           </div>
 
                           <p className={`mt-2 text-xs leading-relaxed font-normal ${isDone ? "text-gray-400 dark:text-slate-500" : "text-gray-600 dark:text-slate-400"}`}>
-                            {activity.description}
+                            {translateActivityText(activity.description, lang)}
                           </p>
                         </div>
                       </div>

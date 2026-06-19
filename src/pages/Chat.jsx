@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "../api/axios";
+import { translations } from "../utils/translations";
 
 export default function Chat() {
   const [message, setMessage] = useState("");
@@ -9,12 +10,20 @@ export default function Chat() {
   const [activeSessionTitle, setActiveSessionTitle] = useState("Percakapan Baru");
   const [loading, setLoading] = useState(false);
   const [sessionsLoading, setSessionsLoading] = useState(false);
+  const [lang, setLang] = useState(localStorage.getItem("app-lang") || "id");
   const chatEndRef = useRef(null);
+
+  const t = (key) => translations[lang]?.[key] || translations["id"]?.[key] || key;
 
   useEffect(() => {
     loadSessions();
-    // Inisialisasi awal: Mulai dengan chat room baru tanpa me-load chat lama secara default
     startNewChat();
+
+    const handleStorage = () => {
+      setLang(localStorage.getItem("app-lang") || "id");
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   useEffect(() => {
@@ -63,7 +72,6 @@ export default function Chat() {
     const currentMessage = message;
     const isFirstMessage = activeSessionId === null;
 
-    // Tambahkan pesan user ke UI secara lokal terlebih dahulu
     const tempUserMsg = {
       id: Date.now(),
       sender: "user",
@@ -79,7 +87,6 @@ export default function Chat() {
         message: currentMessage,
       };
 
-      // Jika kita berada di dalam sesi tertentu, kirimkan session_id-nya
       if (activeSessionId) {
         payload.session_id = activeSessionId;
         payload.session_title = activeSessionTitle;
@@ -87,13 +94,11 @@ export default function Chat() {
 
       const res = await axios.post("/chat", payload);
 
-      // Jika ini adalah pesan pertama di room baru, dapatkan session_id dari server
       if (isFirstMessage) {
         setActiveSessionId(res.data.session_id);
         setActiveSessionTitle(res.data.session_title || "Curhat Baru");
       }
 
-      // Tambahkan respon bot ke UI
       const tempBotMsg = {
         id: Date.now() + 1,
         sender: "bot",
@@ -101,17 +106,15 @@ export default function Chat() {
       };
       setHistory((prev) => [...prev, tempBotMsg]);
 
-      // Refresh daftar riwayat sesi di sidebar
       loadSessions();
     } catch (err) {
       console.error("Gagal mengirim pesan chat:", err);
-      // Tambahkan pesan error dari sistem
       setHistory((prev) => [
         ...prev,
         {
           id: Date.now() + 2,
           sender: "system",
-          message: "Maaf, aku sedang mengalami kendala jaringan saat memproses ceritamu. Tolong pastikan internetmu menyala dan coba kirim ulang pesanmu ya. ❤️",
+          message: t("chatNetworkError"),
         },
       ]);
     } finally {
@@ -122,7 +125,7 @@ export default function Chat() {
   const formatTime = (timeStr) => {
     if (!timeStr) return "";
     const date = new Date(timeStr);
-    return date.toLocaleDateString("id-ID", {
+    return date.toLocaleDateString(lang === "en" ? "en-US" : "id-ID", {
       month: "short",
       day: "numeric",
       hour: "2-digit",
@@ -130,21 +133,28 @@ export default function Chat() {
     });
   };
 
+  const renderedSessionTitle =
+    activeSessionTitle === "Percakapan Baru"
+      ? t("chatNewTitle")
+      : activeSessionTitle === "Curhat Baru"
+      ? t("chatNewTitleSaved")
+      : activeSessionTitle;
+
   return (
     <div className="max-w-6xl mx-auto h-[calc(100vh-7.5rem)] flex gap-6">
       
       {/* LEFT SIDEBAR: CHAT HISTORY */}
-      <aside className="w-80 flex-shrink-0 flex flex-col bg-white dark:bg-slate-900 border border-gray-100/80 dark:border-slate-800/60 rounded-3xl p-4 shadow-sm transition-colors duration-300">
+      <aside className="w-80 flex-shrink-0 flex flex-col bg-white dark:bg-slate-905 border border-gray-100/80 dark:border-slate-800/60 rounded-3xl p-4 shadow-sm transition-colors duration-300">
         <button
           onClick={startNewChat}
           className="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl py-3 px-4 font-bold text-sm flex items-center justify-center gap-2 transition cursor-pointer shadow-sm shadow-indigo-100/50 dark:shadow-none mb-4"
         >
-          <span>➕</span> Mulai Curhat Baru
+          <span>➕</span> {t("chatNewBtn")}
         </button>
 
         <div className="flex-1 overflow-y-auto space-y-2 pr-1">
           <h3 className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-slate-500 px-2.5 mb-2.5">
-            Riwayat Percakapan
+            {t("chatSidebarTitle")}
           </h3>
 
           {sessionsLoading && sessions.length === 0 ? (
@@ -152,17 +162,23 @@ export default function Chat() {
               <div className="w-5 h-5 border-2 border-indigo-200 border-t-indigo-650 rounded-full animate-spin"></div>
             </div>
           ) : sessions.length === 0 ? (
-            <p className="text-xs text-gray-450 dark:text-slate-500 italic text-center py-8 px-4 leading-relaxed">
-              Belum ada riwayat percakapan sebelumnya.
+            <p className="text-xs text-gray-455 dark:text-slate-500 italic text-center py-8 px-4 leading-relaxed">
+              {t("chatNoHistory")}
             </p>
           ) : (
             sessions.map((sess) => {
               const isActive = activeSessionId === sess.session_id;
+              const renderedSessTitle =
+                sess.session_title === "Curhat Baru"
+                  ? t("chatNewTitleSaved")
+                  : sess.session_title === "Percakapan Baru"
+                  ? t("chatNewTitle")
+                  : sess.session_title || (lang === "en" ? "Chat" : "Curhat");
               return (
                 <button
                   key={sess.session_id}
                   onClick={() => loadHistory(sess.session_id)}
-                  className={`w-full text-left p-3.5 rounded-2xl transition duration-150 flex items-start gap-2.5 cursor-pointer border ${
+                  className={`w-full text-left p-3.5 rounded-2xl transition duration-155 flex items-start gap-2.5 cursor-pointer border ${
                     isActive
                       ? "bg-indigo-50/70 border-indigo-100/50 text-indigo-700 dark:bg-indigo-950/40 dark:border-indigo-900/30 dark:text-indigo-400 font-bold"
                       : "bg-transparent border-transparent text-gray-650 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800/40"
@@ -171,7 +187,7 @@ export default function Chat() {
                   <span className="text-base select-none mt-0.5">💬</span>
                   <div className="flex-1 min-w-0">
                     <h4 className="text-xs font-bold truncate">
-                      {sess.session_title || "Curhat"}
+                      {renderedSessTitle}
                     </h4>
                     <span className="text-[9px] text-gray-400 dark:text-slate-500 mt-1 block">
                       {formatTime(sess.last_activity)}
@@ -188,24 +204,24 @@ export default function Chat() {
       <section className="flex-1 flex flex-col justify-between h-full bg-white dark:bg-slate-900 border border-gray-100/80 dark:border-slate-800/60 rounded-3xl shadow-sm overflow-hidden transition-colors duration-300">
         
         {/* Chat Room Header */}
-        <div className="p-5 border-b border-gray-50 dark:border-slate-800/60 flex items-center gap-3 bg-slate-50/50 dark:bg-slate-950/20">
+        <div className="p-5 border-b border-gray-50 dark:border-slate-800/60 flex items-center gap-3 bg-slate-50/50 dark:bg-slate-955/20">
           <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100/30 dark:border-indigo-900/20 flex items-center justify-center text-xl select-none">
             🤖
           </div>
           <div className="flex-1 min-w-0">
             <h2 className="text-sm font-extrabold text-gray-800 dark:text-slate-100 truncate">
-              {activeSessionTitle}
+              {renderedSessionTitle}
             </h2>
             <p className="text-[10px] text-gray-450 dark:text-slate-500 mt-0.5">
-              Konselor Virtual Ruang Rasa • Siap mendengarkan ceritamu 24/7
+              {t("chatCounselorSubtitle")}
             </p>
           </div>
           {activeSessionId && (
             <button
               onClick={startNewChat}
-              className="text-[11px] font-bold text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-xl transition cursor-pointer"
+              className="text-[11px] font-bold text-gray-400 hover:text-indigo-650 dark:hover:text-indigo-400 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-xl transition cursor-pointer"
             >
-              Curhat Baru
+              {t("chatNewBtn")}
             </button>
           )}
         </div>
@@ -216,10 +232,10 @@ export default function Chat() {
             <div className="h-full flex flex-col items-center justify-center text-center p-8 max-w-sm mx-auto">
               <span className="text-4xl mb-3 select-none">✨</span>
               <h3 className="text-sm font-extrabold text-gray-800 dark:text-slate-200">
-                Mulai Curhat Baru
+                {t("chatWelcomeTitle")}
               </h3>
               <p className="text-xs text-gray-500 dark:text-slate-400 mt-2 leading-relaxed font-normal">
-                Ketik dan kirim pesan pertamamu. Apapun yang sedang mengganggu pikiranmu — stres, cemas, atau lelah — tumpahkan semuanya di sini. Konselor virtual siap mendengarkan secara privat.
+                {t("chatWelcomeText")}
               </p>
             </div>
           ) : (
@@ -230,7 +246,7 @@ export default function Chat() {
               if (isSystem) {
                 return (
                   <div key={chat.id} className="flex justify-center my-4">
-                    <div className="bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/30 text-red-700 dark:text-red-400 text-xs px-4 py-2.5 rounded-2xl max-w-[85%] text-center shadow-sm">
+                    <div className="bg-red-50 dark:bg-red-955/20 border border-red-100 dark:border-red-900/30 text-red-700 dark:text-red-400 text-xs px-4 py-2.5 rounded-2xl max-w-[85%] text-center shadow-sm">
                       {chat.message}
                     </div>
                   </div>
@@ -251,7 +267,7 @@ export default function Chat() {
                     <div
                       className={`px-4 py-3 rounded-2xl text-xs leading-relaxed whitespace-pre-line shadow-sm border ${
                         isUser
-                          ? "bg-indigo-600 text-white border-indigo-650 rounded-br-none"
+                          ? "bg-indigo-650 text-white border-indigo-650 rounded-br-none"
                           : "bg-slate-50 dark:bg-slate-850 text-gray-800 dark:text-slate-200 border-gray-100 dark:border-slate-800/80 rounded-bl-none"
                       }`}
                     >
@@ -267,11 +283,11 @@ export default function Chat() {
           {loading && history.length > 0 && history[history.length - 1].sender === "user" && (
             <div className="flex justify-start">
               <div className="flex items-end gap-2.5 max-w-[75%]">
-                <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/20 text-sm flex items-center justify-center select-none flex-shrink-0 mb-1">
+                <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-100/30 dark:border-indigo-900/20 text-sm flex items-center justify-center select-none flex-shrink-0 mb-1">
                   🤖
                 </div>
                 <div className="px-4 py-3 bg-slate-50 dark:bg-slate-850 text-gray-500 dark:text-slate-400 border border-gray-100 dark:border-slate-800/80 rounded-2xl rounded-bl-none text-xs flex items-center gap-1.5 shadow-sm">
-                  <span className="font-semibold">Mendengarkan</span>
+                  <span className="font-semibold">{t("chatListening")}</span>
                   <span className="flex gap-0.5 mt-1.5">
                     <span className="w-1.5 h-1.5 bg-gray-400 dark:bg-slate-550 rounded-full animate-bounce duration-500"></span>
                     <span className="w-1.5 h-1.5 bg-gray-400 dark:bg-slate-550 rounded-full animate-bounce duration-500 delay-150"></span>
@@ -289,7 +305,7 @@ export default function Chat() {
         <div className="p-3 bg-slate-50/50 dark:bg-slate-950/20 border-t border-gray-50 dark:border-slate-800/60 flex items-center gap-3 transition-colors">
           <input
             type="text"
-            placeholder={loading ? "Tunggu sebentar..." : "Ceritakan perasaanmu di sini..."}
+            placeholder={loading ? t("chatInputPlaceholderLoading") : t("chatInputPlaceholder")}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             onKeyDown={(e) => {
@@ -310,7 +326,7 @@ export default function Chat() {
                 : "bg-indigo-600 hover:bg-indigo-700 text-white"
             }`}
           >
-            Kirim
+            {t("chatSendBtn")}
           </button>
         </div>
 

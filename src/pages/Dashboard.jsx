@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
-import { translations } from "../utils/translations";
+import { translations, translateMoodName, translateActivityText } from "../utils/translations";
 
 export default function Dashboard() {
   const [stats, setStats] = useState(null);
@@ -188,7 +188,7 @@ export default function Dashboard() {
               <span className="text-xl select-none">🌙</span>
             </div>
             <p className={`text-2xl font-bold mt-4 ${hasFilledMood ? "text-gray-800 dark:text-slate-100" : "text-gray-400 dark:text-slate-500 italic"}`}>
-              {hasFilledMood ? moodValue : (lang === "en" ? "Not Logged" : "Belum Diisi")}
+              {hasFilledMood ? translateMoodName(moodValue, lang) : (lang === "en" ? "Not Logged" : "Belum Diisi")}
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-gray-50 dark:border-slate-900 text-xs">
@@ -228,7 +228,7 @@ export default function Dashboard() {
               <span className="text-xl select-none">👑</span>
             </div>
             <p className="text-2xl font-bold text-gray-800 dark:text-slate-100 mt-4">
-              {stats?.mood_dominan || (lang === "en" ? "None Yet" : "Belum Ada")}
+              {stats?.mood_dominan ? translateMoodName(stats.mood_dominan, lang) : (lang === "en" ? "None Yet" : "Belum Ada")}
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-gray-50 dark:border-slate-900 text-xs text-gray-400 dark:text-slate-500">
@@ -275,7 +275,7 @@ export default function Dashboard() {
               {stats?.insights?.map((insight, idx) => (
                 <li key={idx} className="flex items-start gap-3 text-sm text-gray-600 dark:text-slate-355 leading-relaxed font-normal">
                   <span className="text-indigo-650 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/20 px-2.5 py-0.5 rounded-lg text-xs border border-indigo-100/25">✓</span>
-                  <span>{insight}</span>
+                  <span>{translateActivityText(insight, lang)}</span>
                 </li>
               ))}
             </ul>
@@ -308,7 +308,7 @@ export default function Dashboard() {
                       <p className="text-sm text-gray-750 dark:text-slate-300 font-normal leading-relaxed">{log.notes}</p>
                     </div>
                     <span className="bg-white dark:bg-slate-900 px-3 py-1 rounded-xl text-xs font-bold shadow-sm border border-gray-50 dark:border-slate-800 whitespace-nowrap">
-                      {log.mood_name}
+                      {translateMoodName(log.mood_name, lang)}
                     </span>
                   </div>
                 ))}

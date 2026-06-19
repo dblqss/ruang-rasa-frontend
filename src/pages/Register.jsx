@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "../api/axios";
+import { translations } from "../utils/translations";
 
 function Register() {
   const navigate = useNavigate();
@@ -11,18 +12,22 @@ function Register() {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+
+  const lang = localStorage.getItem("app-lang") || "id";
+  const t = (key) => translations[lang]?.[key] || translations["id"]?.[key] || key;
+
   const register = async (e) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.password) {
-      alert("Semua field harus diisi!");
+      alert(t("valAllFieldsRequired"));
       return;
     }
     if (!form.email.toLowerCase().endsWith("@gmail.com")) {
-      alert("Email harus menggunakan alamat @gmail.com!");
+      alert(t("valEmailGmailRequired"));
       return;
     }
     if (form.password.length < 6) {
-      alert("Password minimal 6 karakter!");
+      alert(t("valPasswordMinLength"));
       return;
     }
 
@@ -44,11 +49,11 @@ function Register() {
       });
       localStorage.setItem("app-saved-accounts", JSON.stringify(accounts));
 
-      alert("Pendaftaran berhasil! Selamat datang di Ruang Rasa.");
+      alert(t("valRegisterSuccess"));
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Registrasi gagal, silakan coba lagi dengan data lain.");
+      alert(err.response?.data?.message || t("valRegisterFailed"));
     } finally {
       setLoading(false);
     }
@@ -68,11 +73,11 @@ function Register() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-600 text-white text-3xl font-bold shadow-lg shadow-indigo-200/50 mb-4">
             R
           </div>
-          <h1 className="text-3xl font-extrabold text-gray-950 tracking-tight">
-            Buat Akun Baru
+          <h1 className="text-3xl font-extrabold text-gray-955 tracking-tight">
+            {t("registerTitle")}
           </h1>
-          <p className="text-gray-500 mt-2 text-sm">
-            Mulai langkah pertamamu menuju kesejahteraan emosional
+          <p className="text-gray-505 mt-2 text-sm font-semibold">
+            {t("registerSub")}
           </p>
         </div>
 
@@ -80,11 +85,11 @@ function Register() {
         <form onSubmit={register} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-              Nama Lengkap
+              {t("registerNameLabel")}
             </label>
             <input
               type="text"
-              placeholder="Nama Anda"
+              placeholder={t("registerNamePlaceholder")}
               value={form.name}
               onChange={(e) =>
                 setForm({
@@ -98,11 +103,11 @@ function Register() {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-              Email
+              {t("loginEmailLabel")}
             </label>
             <input
               type="email"
-              placeholder="silahkan masukkan email Gmail Anda (contoh@gmail.com)"
+              placeholder={t("registerEmailPlaceholder")}
               value={form.email}
               onChange={(e) =>
                 setForm({
@@ -116,11 +121,11 @@ function Register() {
 
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-              Password
+              {t("loginPasswordLabel")}
             </label>
             <input
               type="password"
-              placeholder="silahkan masukkan password anda"
+              placeholder={t("loginPasswordPlaceholder")}
               value={form.password}
               onChange={(e) =>
                 setForm({
@@ -140,20 +145,20 @@ function Register() {
             {loading ? (
               <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
             ) : (
-              "Daftar Sekarang"
+              t("registerBtn")
             )}
           </button>
         </form>
 
         {/* Footer Link */}
         <div className="mt-8 text-center border-t border-gray-100 pt-6">
-          <p className="text-sm text-gray-500">
-            Sudah memiliki akun?{" "}
+          <p className="text-sm text-gray-550">
+            {t("registerFooterText")}{" "}
             <Link
               to="/"
               className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline transition duration-200"
             >
-              Masuk Disini
+              {t("registerFooterLink")}
             </Link>
           </p>
         </div>

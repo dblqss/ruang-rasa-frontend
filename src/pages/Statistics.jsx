@@ -11,15 +11,25 @@ import {
   Pie,
   Cell,
 } from "recharts";
+import { translations, translateMoodName, translateMonthName } from "../utils/translations";
 
 export default function Statistics() {
   const [monthly, setMonthly] = useState([]);
   const [yearly, setYearly] = useState([]);
   const [distribution, setDistribution] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [lang, setLang] = useState(localStorage.getItem("app-lang") || "id");
+
+  const t = (key) => translations[lang]?.[key] || translations["id"]?.[key] || key;
 
   useEffect(() => {
     loadStatistics();
+
+    const handleStorage = () => {
+      setLang(localStorage.getItem("app-lang") || "id");
+    };
+    window.addEventListener("storage", handleStorage);
+    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
   const loadStatistics = async () => {
@@ -44,19 +54,19 @@ export default function Statistics() {
   const getMoodColor = (moodName) => {
     const name = moodName.toLowerCase();
     
-    // Explicit color mapping for standard moods (earthy/cozy, high contrast, no duplicates)
+    // Explicit color mapping for standard moods
     if (name.includes("sangat bahagia")) return "#F59E0B"; // Warm Gold/Amber
     if (name.includes("bahagia")) return "#D97706"; // Amber Orange
     if (name.includes("bersyukur") || name.includes("syukur")) return "#10B981"; // Emerald Green
     if (name.includes("semangat") || name.includes("produktif")) return "#EC4899"; // Vibrant Rose
     if (name.includes("tenang") || name.includes("damai")) return "#06B6D4"; // Ocean Cyan/Teal
     if (name.includes("biasa")) return "#6B7280"; // Cool Slate Gray
-    if (name.includes("cemas") || name.includes("khawatir") || name.includes("stres")) return "#6366F1"; // Indigo Blue
+    if (name.includes("cemas") || name.includes("khawatir") || name.includes("stres") || name.includes("stress")) return "#6366F1"; // Indigo Blue
     if (name.includes("marah") || name.includes("kesal")) return "#EF4444"; // Crimson Red
     if (name.includes("sedih") || name.includes("kecewa") || name.includes("sepi")) return "#3B82F6"; // Royal Blue
     if (name.includes("lelah") || name.includes("ngantuk") || name.includes("bosan")) return "#7C3AED"; // Violet Purple
 
-    // Dynamic fallback using highly distinct pastel/earthy tones
+    // Dynamic fallback
     let hash = 0;
     for (let i = 0; i < name.length; i++) {
       hash = name.charCodeAt(i) + ((hash << 5) - hash);
@@ -72,75 +82,109 @@ export default function Statistics() {
 
   const getCounselorInsight = () => {
     if (distribution.length === 0) {
-      return "Belum ada catatan emosi yang terekam di sistem. Silakan isi mood harianmu di menu 'Mood Hari Ini' agar konselor virtual kami dapat memetakan kestabilan emosi dan memberikan rangkuman analisis pola pikiranmu secara lengkap.";
+      return lang === "en"
+        ? "No emotional logs recorded in the system. Please log your daily mood in the 'Daily Mood' menu so our virtual counselor can map your emotional stability and provide a comprehensive summary of your thought patterns."
+        : "Belum ada catatan emosi yang terekam di sistem. Silakan isi mood harianmu di menu 'Mood Hari Ini' agar konselor virtual kami dapat memetakan kestabilan emosi dan memberikan rangkuman analisis pola pikiranmu secara lengkap.";
     }
 
-    const maxTotal = Math.max(...distribution.map(item => item.total));
-    const topMoods = distribution.filter(item => item.total === maxTotal);
+    const maxTotal = Math.max(...distribution.map((item) => item.total));
+    const topMoods = distribution.filter((item) => item.total === maxTotal);
     const topMoodPercentage = Math.round((maxTotal / totalLogs) * 100);
 
     if (topMoods.length > 1) {
-      // Handle TIE case
-      const moodNames = topMoods.map(item => item.mood_name).join(", ").replace(/, ([^,]*)$/, " dan $1");
+      const mappedMoodNames = topMoods.map((item) => translateMoodName(item.mood_name, lang));
+      const moodNames = lang === "en"
+        ? mappedMoodNames.join(", ").replace(/, ([^,]*)$/, " and $1")
+        : topMoods.map((item) => item.mood_name).join(", ").replace(/, ([^,]*)$/, " dan $1");
       
-      const hasPositive = topMoods.some(item => {
+      const hasPositive = topMoods.some((item) => {
         const name = item.mood_name.toLowerCase();
         return name.includes("bahagia") || name.includes("tenang") || name.includes("syukur") || name.includes("semangat");
       });
-      const hasNegative = topMoods.some(item => {
+      const hasNegative = topMoods.some((item) => {
         const name = item.mood_name.toLowerCase();
-        return name.includes("cemas") || name.includes("stres") || name.includes("marah") || name.includes("sedih") || name.includes("lelah");
+        return name.includes("cemas") || name.includes("stres") || name.includes("stress") || name.includes("marah") || name.includes("sedih") || name.includes("lelah");
       });
 
       let dynamicAdvice = "";
       if (hasPositive && !hasNegative) {
-        dynamicAdvice = "Ini adalah pola emosi yang sangat sehat. Pikiran Anda berada dalam keadaan seimbang dan dipenuhi oleh berbagai emosi positif secara merata. Pertahankan kestabilan ini dengan konsisten menulis jurnal harian.";
+        dynamicAdvice = lang === "en"
+          ? "This is a very healthy emotional pattern. Your mind is in a balanced state and filled with various positive emotions equally. Maintain this stability by consistently writing daily journals."
+          : "Ini adalah pola emosi yang sangat sehat. Pikiran Anda berada dalam keadaan seimbang dan dipenuhi oleh berbagai emosi positif secara merata. Pertahankan kestabilan ini dengan konsisten menulis jurnal harian.";
       } else if (!hasPositive && hasNegative) {
-        dynamicAdvice = "Data menunjukkan Anda sedang mengalami beberapa tekanan emosi negatif secara bersamaan. Konselor menyarankan Anda untuk mengambil jeda sejenak dari rutinitas harian, melakukan relaksasi pernapasan 4-7-8, dan menceritakan apa yang mengganjal pikiran Anda di menu 'Cerita Yuk'.";
+        dynamicAdvice = lang === "en"
+          ? "Data shows you are experiencing several negative emotional pressures simultaneously. The counselor suggests taking a break from your daily routine, practicing 4-7-8 breathing relaxation, and sharing what's on your mind in the 'Chat Room' menu."
+          : "Data menunjukkan Anda sedang mengalami beberapa tekanan emosi negatif secara bersamaan. Konselor menyarankan Anda untuk mengambil jeda sejenak dari rutinitas harian, melakukan relaksasi pernapasan 4-7-8, dan menceritakan apa yang mengganjal pikiran Anda di menu 'Cerita Yuk'.";
       } else {
-        dynamicAdvice = "Ini menunjukkan dinamika emosi yang aktif, di mana perasaan positif dan negatif Anda berinteraksi secara seimbang. Merasa lelah atau cemas di samping bersyukur adalah hal yang wajar. Fokuslah pada hal-hal kecil yang bisa Anda kendalikan hari ini.";
+        dynamicAdvice = lang === "en"
+          ? "This indicates active emotional dynamics, where your positive and negative feelings interact in a balanced way. Feeling tired or anxious alongside being grateful is natural. Focus on small things you can control today."
+          : "Ini menunjukkan dinamika emosi yang aktif, di mana perasaan positif dan negatif Anda berinteraksi secara seimbang. Merasa lelah atau cemas di samping bersyukur adalah hal yang wajar. Fokuslah pada hal-hal kecil yang bisa Anda kendalikan hari ini.";
       }
 
-      return `Analisis menunjukkan bahwa tidak ada satu emosi tunggal yang mendominasi; perasaanmu tersebar secara seimbang di beberapa emosi utama yaitu ${moodNames}, masing-masing menyumbang ${topMoodPercentage}% dari total catatanmu. ${dynamicAdvice}`;
+      return lang === "en"
+        ? `Analysis shows that no single emotion dominates; your feelings are balanced across several main emotions, namely ${moodNames}, each contributing ${topMoodPercentage}% of your total entries. ${dynamicAdvice}`
+        : `Analisis menunjukkan bahwa tidak ada satu emosi tunggal yang mendominasi; perasaanmu tersebar secara seimbang di beberapa emosi utama yaitu ${moodNames}, masing-masing menyumbang ${topMoodPercentage}% dari total catatanmu. ${dynamicAdvice}`;
     }
 
     const topMoodItem = topMoods[0];
-    const topMoodName = topMoodItem.mood_name;
-    const nameLower = topMoodName.toLowerCase();
+    const rawMoodName = topMoodItem.mood_name;
+    const topMoodName = translateMoodName(rawMoodName, lang);
+    const nameLower = rawMoodName.toLowerCase();
+    
     if (nameLower.includes("bahagia") || nameLower.includes("tenang") || nameLower.includes("syukur")) {
-      return `Analisis menunjukkan bahwa emosi yang paling dominan kamu rasakan adalah ${topMoodName} dengan kontribusi sebesar ${topMoodPercentage}% dari keseluruhan catatanmu. Ini adalah tanda yang sangat baik, menunjukkan bahwa pikiranmu sedang berada dalam fase yang stabil, damai, dan penuh penerimaan diri. Untuk mempertahankan kondisi positif ini, cobalah untuk tetap konsisten menulis jurnal refleksi harian, membagikan energi positifmu ke lingkungan sosial, dan merayakan pencapaian-pencapaian kecil setiap hari sebagai apresiasi terhadap dirimu sendiri.`;
+      return lang === "en"
+        ? `Analysis shows that the most dominant emotion you feel is ${topMoodName} with a contribution of ${topMoodPercentage}% of your total entries. This is an excellent sign, indicating that your mind is in a stable, peaceful, and self-accepting phase. To maintain this positive state, try to stay consistent in writing daily reflection journals, sharing your positive energy with your social environment, and celebrating small achievements every day as self-appreciation.`
+        : `Analisis menunjukkan bahwa emosi yang paling dominan kamu rasakan adalah ${topMoodName} dengan kontribusi sebesar ${topMoodPercentage}% dari keseluruhan catatanmu. Ini adalah tanda yang sangat baik, menunjukkan bahwa pikiranmu sedang berada dalam fase yang stabil, damai, dan penuh penerimaan diri. Untuk mempertahankan kondisi positif ini, cobalah untuk tetap konsisten menulis jurnal refleksi harian, membagikan energi positifmu ke lingkungan sosial, dan merayakan pencapaian-pencapaian kecil setiap hari sebagai apresiasi terhadap dirimu sendiri.`;
     }
-    if (nameLower.includes("cemas") || nameLower.includes("khawatir") || nameLower.includes("stres")) {
-      return `Berdasarkan rangkuman data, emosimu didominasi oleh perasaan ${topMoodName} sebesar ${topMoodPercentage}% dari total log. Seringkali kecemasan atau tekanan mental yang berlebih dipicu oleh kekhawatiran tentang hal-hal di masa depan yang belum terjadi, atau beban kerja yang menumpuk. Konselor menyarankanmu untuk melatih teknik pernapasan lambat diafragma (seperti sesi napas 4-7-8 di Dashboard) guna menstabilkan detak jantung, membatasi asupan kafein yang dapat memicu adrenalin, serta fokus menyelesaikan tugas kecil satu per satu untuk menghindari rasa tertekan.`;
+    if (nameLower.includes("cemas") || nameLower.includes("khawatir") || nameLower.includes("stres") || nameLower.includes("stress")) {
+      return lang === "en"
+        ? `Based on the data summary, your emotions are dominated by feelings of ${topMoodName} at ${topMoodPercentage}% of the total logs. Often, excessive anxiety or mental pressure is triggered by worries about future events that haven't happened yet, or an accumulated workload. The counselor advises you to practice diaphragmatic breathing (such as the 4-7-8 breathing session on the Dashboard) to stabilize your heart rate, limit caffeine intake which can trigger adrenaline, and focus on completing small tasks one by one to avoid feeling overwhelmed.`
+        : `Berdasarkan rangkuman data, emosimu didominasi oleh perasaan ${topMoodName} sebesar ${topMoodPercentage}% dari total log. Seringkali kecemasan atau tekanan mental yang berlebih dipicu oleh kekhawatiran tentang hal-hal di masa depan yang belum terjadi, atau beban kerja yang menumpuk. Konselor menyarankanmu untuk melatih teknik pernapasan lambat diafragma (seperti sesi napas 4-7-8 di Dashboard) guna menstabilkan detak jantung, membatasi asupan kafein yang dapat memicu adrenalin, serta fokus menyelesaikan tugas kecil satu per satu untuk menghindari rasa tertekan.`;
     }
     if (nameLower.includes("sedih") || nameLower.includes("kecewa") || nameLower.includes("sepi")) {
-      return `Data menunjukkan adanya kecenderungan perasaan ${topMoodName} yang cukup tinggi, yaitu sekitar ${topMoodPercentage}% dari total catatanmu. Merasa sedih, terluka, atau merasa terasing adalah bagian normal dari emosi manusia. Cobalah rilis kesedihan tersebut dengan menulis jurnal ekspresif secara jujur tanpa sensor di menu 'Cerita Yuk', hubungi teman dekat untuk sekadar mendengarkan keluh kesahmu, dan luangkan waktu 15 menit untuk jalan kaki santai menghirup udara segar guna membantu merangsang hormon kebahagiaan alami di dalam tubuhmu.`;
+      return lang === "en"
+        ? `Data shows a fairly high tendency of feeling ${topMoodName}, which is about ${topMoodPercentage}% of your total logs. Feeling sad, hurt, or isolated is a normal part of human emotion. Try to release that sadness by writing an expressive journal honestly without filter in the 'Chat Room' menu, contact close friends to just listen to your feelings, and take 15 minutes for a relaxed walk to breathe fresh air to help stimulate natural happiness hormones in your body.`
+        : `Data menunjukkan adanya kecenderungan perasaan ${topMoodName} yang cukup tinggi, yaitu sekitar ${topMoodPercentage}% dari total catatanmu. Merasa sedih, terluka, atau merasa terasing adalah bagian normal dari emosi manusia. Cobalah rilis kesedihan tersebut dengan menulis jurnal ekspresif secara jujur tanpa sensor di menu 'Cerita Yuk', hubungi teman dekat untuk sekadar mendengarkan keluh kesahmu, dan luangkan waktu 15 menit untuk jalan kaki santai menghirup udara segar guna membantu merangsang hormon kebahagiaan alami di dalam tubuhmu.`;
     }
-    if (nameLower.includes("lelah") || nameLower.includes("ngantuk")) {
-      return `Kamu cenderung merasa ${topMoodName} belakangan ini, yang menyumbang sekitar ${topMoodPercentage}% dari jurnal emosimu. Ini adalah cara tubuhmu berkomunikasi bahwa energi fisik dan mentalmu sudah berada di batas kapasitasnya. Konselor sangat menyarankanmu untuk merapikan jam tidur (sleep hygiene), menghindari paparan layar ponsel 30 menit sebelum tidur, serta menyempatkan waktu istirahat mikro selama 5 menit di tengah-tengah pekerjaan agar terhindar dari burnout berkepanjangan.`;
+    if (nameLower.includes("lelah") || nameLower.includes("ngantuk") || nameLower.includes("bosan")) {
+      return lang === "en"
+        ? `You tend to feel ${topMoodName} lately, which accounts for about ${topMoodPercentage}% of your emotional journal. This is your body's way of communicating that your physical and mental energy is at its capacity limit. The counselor strongly advises you to improve your sleep schedule (sleep hygiene), avoid screen exposure 30 minutes before sleep, and take 5-minute micro-breaks during work to prevent prolonged burnout.`
+        : `Kamu cenderung merasa ${topMoodName} belakangan ini, yang menyumbang sekitar ${topMoodPercentage}% dari jurnal emosimu. Ini adalah cara tubuhmu berkomunikasi bahwa energi fisik dan mentalmu sudah berada di batas kapasitasnya. Konselor sangat menyarankanmu untuk merapikan jam tidur (sleep hygiene), menghindari paparan layar ponsel 30 menit sebelum tidur, serta menyempatkan waktu istirahat mikro selama 5 menit di tengah-tengah pekerjaan agar terhindar dari burnout berkepanjangan.`;
     }
 
-    return `Mood utama yang kamu rasakan adalah ${topMoodName} dengan frekuensi ${topMoodPercentage}% dari keseluruhan jurnal emosimu. Tetap catat kondisimu setiap hari secara jujur untuk mendapatkan hasil pemetaan psikologis jangka panjang yang lebih akurat.`;
+    return lang === "en"
+      ? `The main mood you feel is ${topMoodName} with a frequency of ${topMoodPercentage}% of your overall emotional journal. Keep logging your condition honestly every day to get a more accurate long-term psychological mapping.`
+      : `Mood utama yang kamu rasakan adalah ${topMoodName} dengan frekuensi ${topMoodPercentage}% dari keseluruhan jurnal emosimu. Tetap catat kondisimu setiap hari secara jujur untuk mendapatkan hasil pemetaan psikologis jangka panjang yang lebih akurat.`;
   };
 
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
         <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
-        <p className="mt-4 text-gray-500 dark:text-slate-400 font-medium">Menganalisis statistik emosimu...</p>
+        <p className="mt-4 text-gray-550 dark:text-slate-400 font-medium">{t("statsLoading")}</p>
       </div>
     );
   }
+
+  const translatedMonthly = monthly.map((item) => ({
+    ...item,
+    bulan: translateMonthName(item.bulan, lang),
+  }));
+
+  const translatedDistribution = distribution.map((item) => ({
+    ...item,
+    mood_name: translateMoodName(item.mood_name, lang),
+  }));
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
       {/* Page Header */}
       <div className="text-left">
         <h1 className="text-3xl font-extrabold text-gray-900 dark:text-slate-100 tracking-tight">
-          📊 Analisis & Statistik Mood
+          {t("statsHeaderTitle")}
         </h1>
         <p className="text-gray-500 dark:text-slate-400 mt-1">
-          Pantau grafik distribusi emosi dan dapatkan pemahaman mendalam tentang pola suasana hatimu.
+          {t("statsHeaderSub")}
         </p>
       </div>
 
@@ -150,15 +194,15 @@ export default function Statistics() {
         {/* DONUT CHART: MOOD DISTRIBUTION */}
         <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-sm border border-gray-100/80 dark:border-slate-800/60 flex flex-col justify-between transition-colors">
           <div>
-            <h2 className="font-bold text-lg text-gray-800 dark:text-slate-100 mb-1">Penyebaran Emosi</h2>
+            <h2 className="font-bold text-lg text-gray-800 dark:text-slate-100 mb-1">{t("statsDistributionTitle")}</h2>
             <p className="text-xs text-gray-400 dark:text-slate-500 mb-6">
-              Grafik lingkaran ini memperlihatkan pembagian kategori mood yang pernah Anda isi. Gunakan diagram ini untuk melacak perasaan apa yang paling sering muncul dalam keseharian Anda.
+              {t("statsDistributionSub")}
             </p>
           </div>
 
           {distribution.length === 0 ? (
             <div className="flex items-center justify-center h-56 text-gray-400 dark:text-slate-500 text-sm italic">
-              Belum ada data jurnaling emosi.
+              {t("statsNoDistribution")}
             </div>
           ) : (
             <div className="flex flex-col sm:flex-row items-center gap-6 justify-center">
@@ -166,7 +210,7 @@ export default function Statistics() {
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
-                      data={distribution}
+                      data={translatedDistribution}
                       dataKey="total"
                       nameKey="mood_name"
                       innerRadius={55}
@@ -178,14 +222,14 @@ export default function Statistics() {
                       ))}
                     </Pie>
                     <Tooltip 
-                      formatter={(value, name) => [`${value} kali`, name]}
+                      formatter={(value, name) => [`${value} ${lang === 'en' ? 'times' : 'kali'}`, name]}
                       contentStyle={{ borderRadius: "12px", border: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
                     />
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="absolute flex flex-col items-center justify-center">
                   <span className="text-2xl font-black text-gray-800 dark:text-slate-200">{totalLogs}</span>
-                  <span className="text-[10px] text-gray-400 dark:text-slate-500 font-bold uppercase tracking-wider">Total Log</span>
+                  <span className="text-[10px] text-gray-400 dark:text-slate-500 font-bold uppercase tracking-wider">{t("statsTotalLogs")}</span>
                 </div>
               </div>
 
@@ -200,7 +244,7 @@ export default function Statistics() {
                           className="w-3 h-3 rounded-full flex-shrink-0"
                           style={{ backgroundColor: getMoodColor(item.mood_name) }}
                         />
-                        <span className="font-semibold text-gray-700 dark:text-slate-350">{item.mood_name}</span>
+                        <span className="font-semibold text-gray-700 dark:text-slate-350">{translateMoodName(item.mood_name, lang)}</span>
                       </div>
                       <span className="text-gray-400 dark:text-slate-500 font-bold">
                         {item.total}x ({pct}%)
@@ -216,20 +260,20 @@ export default function Statistics() {
         {/* BAR CHART: MONTHLY FREQUENCY */}
         <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-sm border border-gray-100/80 dark:border-slate-800/60 flex flex-col justify-between transition-colors">
           <div>
-            <h2 className="font-bold text-lg text-gray-800 dark:text-slate-100 mb-1">Konsistensi Bulanan</h2>
+            <h2 className="font-bold text-lg text-gray-800 dark:text-slate-100 mb-1">{t("statsConsistencyTitle")}</h2>
             <p className="text-xs text-gray-400 dark:text-slate-500 mb-6">
-              Grafik batang ini merekam tingkat keaktifan menulis jurnal emosi Anda setiap bulannya. Ini membantu memantau konsistensi pencatatan Anda demi hasil analisis psikologis jangka panjang.
+              {t("statsConsistencySub")}
             </p>
           </div>
 
           {monthly.length === 0 ? (
             <div className="flex items-center justify-center h-56 text-gray-400 dark:text-slate-500 text-sm italic">
-              Belum ada data jurnaling bulanan.
+              {t("statsNoMonthly")}
             </div>
           ) : (
             <div className="h-56">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={monthly}>
+                <BarChart data={translatedMonthly}>
                   <XAxis dataKey="bulan" tickLine={false} axisLine={false} tick={{ fill: "#9ca3af", fontSize: 11 }} />
                   <YAxis tickLine={false} axisLine={false} tick={{ fill: "#9ca3af", fontSize: 11 }} />
                   <Tooltip 
@@ -253,8 +297,8 @@ export default function Statistics() {
       <div className="bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-100/40 dark:border-indigo-900/30 rounded-3xl p-8 shadow-sm flex items-start gap-4">
         <span className="text-3xl mt-0.5 select-none">🧠</span>
         <div className="flex-1">
-          <h3 className="font-extrabold text-indigo-900 dark:text-indigo-300 text-lg mb-2">Analisis Pola Emosimu</h3>
-          <p className="text-indigo-850 dark:text-slate-100 text-sm leading-relaxed font-normal">
+          <h3 className="font-extrabold text-indigo-900 dark:text-indigo-300 text-lg mb-2">{t("statsInsightHeader")}</h3>
+          <p className="text-indigo-855 dark:text-slate-100 text-sm leading-relaxed font-normal">
             {getCounselorInsight()}
           </p>
         </div>
@@ -262,28 +306,28 @@ export default function Statistics() {
 
       {/* Monthly Table Details */}
       <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl shadow-sm border border-gray-100/80 dark:border-slate-800/60 transition-colors">
-        <h2 className="font-bold text-lg text-gray-800 dark:text-slate-100 mb-2">Tabel Detail Frekuensi Bulanan</h2>
-        <p className="text-xs text-gray-400 dark:text-slate-500 mb-6">Berikut adalah rincian angka frekuensi pencatatan suasana hati yang Anda lakukan setiap bulannya.</p>
+        <h2 className="font-bold text-lg text-gray-800 dark:text-slate-100 mb-2">{t("statsTableHeader")}</h2>
+        <p className="text-xs text-gray-400 dark:text-slate-500 mb-6">{t("statsTableSub")}</p>
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead>
               <tr className="border-b border-gray-100 dark:border-slate-800 text-gray-400 dark:text-slate-500 font-semibold">
-                <th className="p-3.5">Bulan</th>
-                <th className="p-3.5 text-right">Frekuensi Pengisian</th>
+                <th className="p-3.5">{t("statsTableColMonth")}</th>
+                <th className="p-3.5 text-right">{t("statsTableColFreq")}</th>
               </tr>
             </thead>
             <tbody>
               {monthly.length === 0 ? (
                 <tr>
-                  <td colSpan="2" className="p-4 text-center text-gray-400 dark:text-slate-500 italic">Belum ada data bulanan</td>
+                  <td colSpan="2" className="p-4 text-center text-gray-400 dark:text-slate-500 italic">{t("statsTableNoData")}</td>
                 </tr>
               ) : (
-                monthly.map((item, index) => (
-                  <tr key={index} className="border-b border-gray-50 dark:border-slate-800/40 text-gray-600 dark:text-slate-400 hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition duration-150">
+                translatedMonthly.map((item, index) => (
+                  <tr key={index} className="border-b border-gray-50 dark:border-slate-800/40 text-gray-650 dark:text-slate-400 hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition duration-150">
                     <td className="p-3.5 font-medium text-gray-800 dark:text-slate-200">{item.bulan}</td>
                     <td className="p-3.5 text-right">
                       <span className="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50/80 dark:bg-indigo-950/40 px-3.5 py-1.5 rounded-xl text-xs inline-block">
-                        {item.total} kali
+                        {item.total} {t("statsTableTimes")}
                       </span>
                     </td>
                   </tr>

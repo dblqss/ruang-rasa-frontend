@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
+import { translations } from "../utils/translations";
 
 function Login() {
   const navigate = useNavigate();
@@ -8,11 +9,14 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  const lang = localStorage.getItem("app-lang") || "id";
+  const t = (key) => translations[lang]?.[key] || translations["id"]?.[key] || key;
 
   const login = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      alert("Email dan password harus diisi!");
+      alert(t("valEmailPasswordRequired"));
       return;
     }
 
@@ -39,7 +43,7 @@ function Login() {
 
       navigate("/dashboard");
     } catch (error) {
-      alert(error.response?.data?.message || "Login gagal, silakan periksa email/password Anda.");
+      alert(error.response?.data?.message || t("valLoginFailed"));
     } finally {
       setLoading(false);
     }
@@ -59,11 +63,11 @@ function Login() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-600 text-white text-3xl font-bold shadow-lg shadow-indigo-200/50 mb-4">
             R
           </div>
-          <h1 className="text-3xl font-extrabold text-gray-950 tracking-tight">
+          <h1 className="text-3xl font-extrabold text-gray-955 tracking-tight">
             Ruang Rasa
           </h1>
-          <p className="text-gray-500 mt-2 text-sm">
-            Tempat aman untuk melacak emosi & kesehatan mentalmu
+          <p className="text-gray-505 mt-2 text-sm font-semibold">
+            {t("loginSub")}
           </p>
         </div>
 
@@ -71,11 +75,11 @@ function Login() {
         <form onSubmit={login} className="space-y-5">
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-1.5 ml-1">
-              Email
+              {t("loginEmailLabel")}
             </label>
             <input
               type="email"
-              placeholder="silahkan masukkan email anda"
+              placeholder={t("loginEmailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
@@ -85,12 +89,12 @@ function Login() {
           <div>
             <div className="flex justify-between items-center mb-1.5 ml-1">
               <label className="block text-sm font-semibold text-gray-700">
-                Password
+                {t("loginPasswordLabel")}
               </label>
             </div>
             <input
               type="password"
-              placeholder="silahkan masukkan password anda"
+              placeholder={t("loginPasswordPlaceholder")}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full border border-gray-200 p-3.5 rounded-2xl bg-white/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all text-sm placeholder:text-gray-400"
@@ -105,20 +109,20 @@ function Login() {
             {loading ? (
               <span className="inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
             ) : (
-              "Masuk ke Akun"
+              t("loginBtn")
             )}
           </button>
         </form>
 
         {/* Footer Link */}
         <div className="mt-8 text-center border-t border-gray-100 pt-6">
-          <p className="text-sm text-gray-500">
-            Belum memiliki akun?{" "}
+          <p className="text-sm text-gray-550">
+            {t("loginFooterText")}{" "}
             <Link
               to="/register"
               className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline transition duration-200"
             >
-              Daftar Sekarang
+              {t("loginFooterLink")}
             </Link>
           </p>
         </div>

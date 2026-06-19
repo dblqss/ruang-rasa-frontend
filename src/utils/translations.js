@@ -160,7 +160,87 @@ export const translations = {
     habit1: "Minum Air Putih 2 Liter",
     habit2: "Istirahat Layar Ponsel 5 mnt",
     habit3: "Melakukan Peregangan / Stretch",
-    habit4: "Menghirup Udara Segar di Luar"
+    habit4: "Menghirup Udara Segar di Luar",
+
+    // Login Page
+    loginTitle: "Masuk ke Akun",
+    loginSub: "Tempat aman untuk melacak emosi & kesehatan mentalmu",
+    loginEmailLabel: "Email",
+    loginEmailPlaceholder: "silahkan masukkan email anda",
+    loginPasswordLabel: "Password",
+    loginPasswordPlaceholder: "silahkan masukkan password anda",
+    loginBtn: "Masuk ke Akun",
+    loginFooterText: "Belum memiliki akun?",
+    loginFooterLink: "Daftar Sekarang",
+    valEmailPasswordRequired: "Email dan password harus diisi!",
+    valLoginFailed: "Login gagal, silakan periksa email/password Anda.",
+
+    // Register Page
+    registerTitle: "Buat Akun Baru",
+    registerSub: "Mulai langkah pertamamu menuju kesejahteraan emosional",
+    registerNameLabel: "Nama Lengkap",
+    registerNamePlaceholder: "Nama Anda",
+    registerEmailPlaceholder: "silahkan masukkan email Gmail Anda (contoh@gmail.com)",
+    registerBtn: "Daftar Sekarang",
+    registerFooterText: "Sudah memiliki akun?",
+    registerFooterLink: "Masuk Disini",
+    valAllFieldsRequired: "Semua field harus diisi!",
+    valEmailGmailRequired: "Email harus menggunakan alamat @gmail.com!",
+    valPasswordMinLength: "Password minimal 6 karakter!",
+    valRegisterSuccess: "Pendaftaran berhasil! Selamat datang di Ruang Rasa.",
+    valRegisterFailed: "Registrasi gagal, silakan coba lagi dengan data lain.",
+
+    // Chat Page
+    chatTitle: "Cerita Yuk",
+    chatSidebarTitle: "Riwayat Percakapan",
+    chatNewBtn: "Mulai Curhat Baru",
+    chatNoHistory: "Belum ada riwayat percakapan sebelumnya.",
+    chatCounselorSubtitle: "Konselor Virtual Ruang Rasa • Siap mendengarkan ceritamu 24/7",
+    chatWelcomeTitle: "Mulai Curhat Baru",
+    chatWelcomeText: "Ketik dan kirim pesan pertamamu. Apapun yang sedang mengganggu pikiranmu — stres, cemas, atau lelah — tumpahkan semuanya di sini. Konselor virtual siap mendengarkan secara privat.",
+    chatNetworkError: "Maaf, aku sedang mengalami kendala jaringan saat memproses ceritamu. Tolong pastikan internetmu menyala dan coba kirim ulang pesanmu ya. ❤️",
+    chatListening: "Mendengarkan",
+    chatInputPlaceholder: "Ceritakan perasaanmu di sini...",
+    chatInputPlaceholderLoading: "Tunggu sebentar...",
+    chatSendBtn: "Kirim",
+    chatNewTitle: "Percakapan Baru",
+    chatNewTitleSaved: "Curhat Baru",
+
+    // Education Page Additional
+    eduHeaderTitle: "📖 Baca Yuk",
+    eduHeaderSub: "Kumpulan artikel praktis yang ditulis dari hati ke hati untuk membantumu memahami diri sendiri dan menjaga kesehatan mental.",
+    eduSearchPlaceholder: "Cari judul artikel atau kata kunci...",
+    eduSortLabel: "Urutkan:",
+    eduSortRecommend: "Rekomendasi",
+    eduSortTitleAsc: "Judul (A-Z)",
+    eduSortTitleDesc: "Judul (Z-A)",
+    eduSortTimeAsc: "Waktu Baca (Tercepat)",
+    eduSortTimeDesc: "Waktu Baca (Terlama)",
+    eduCategoryLabel: "Kategori Topik",
+    eduNoArticles: "Tidak ada artikel yang cocok dengan filter atau kata kunci Anda.",
+    eduReadMore: "Baca Selengkapnya",
+    eduFinishRead: "Selesai Membaca",
+    eduDuration: "Durasi: {time}",
+    eduTopic: "Topik: Psikologi Terapan",
+
+    // Statistics Page Additional
+    statsHeaderTitle: "📊 Analisis & Statistik Mood",
+    statsHeaderSub: "Pantau grafik distribusi emosi dan dapatkan pemahaman mendalam tentang pola suasana hatimu.",
+    statsDistributionTitle: "Penyebaran Emosi",
+    statsDistributionSub: "Grafik lingkaran ini memperlihatkan pembagian kategori mood yang pernah Anda isi. Gunakan diagram ini untuk melacak perasaan apa yang paling sering muncul dalam keseharian Anda.",
+    statsNoDistribution: "Belum ada data jurnaling emosi.",
+    statsTotalLogs: "Total Log",
+    statsConsistencyTitle: "Konsistensi Bulanan",
+    statsConsistencySub: "Grafik batang ini merekam tingkat keaktifan menulis jurnal emosi Anda setiap bulannya. Ini membantu memantau konsistensi pencatatan Anda demi hasil analisis psikologis jangka panjang.",
+    statsNoMonthly: "Belum ada data jurnaling bulanan.",
+    statsInsightHeader: "Analisis Pola Emosimu",
+    statsTableHeader: "Tabel Detail Frekuensi Bulanan",
+    statsTableSub: "Berikut adalah rincian angka frekuensi pencatatan suasana hati yang Anda lakukan setiap bulannya.",
+    statsTableColMonth: "Bulan",
+    statsTableColFreq: "Frekuensi Pengisian",
+    statsTableNoData: "Belum ada data bulanan",
+    statsTableTimes: "kali",
+    statsLoading: "Menganalisis statistik emosimu..."
   },
   en: {
     // Sidebar & Navigation
@@ -323,6 +403,232 @@ export const translations = {
     habit1: "Drink 2 Liters of Water",
     habit2: "Screen Break for 5 mins",
     habit3: "Stretching / Stretch",
-    habit4: "Breathe Fresh Air Outside"
+    habit4: "Breathe Fresh Air Outside",
+
+    // Login Page
+    loginTitle: "Sign In",
+    loginSub: "A safe place to track your emotions & mental health",
+    loginEmailLabel: "Email",
+    loginEmailPlaceholder: "please enter your email",
+    loginPasswordLabel: "Password",
+    loginPasswordPlaceholder: "please enter your password",
+    loginBtn: "Sign In",
+    loginFooterText: "Don't have an account?",
+    loginFooterLink: "Register Now",
+    valEmailPasswordRequired: "Email and password are required!",
+    valLoginFailed: "Login failed, please check your email/password.",
+
+    // Register Page
+    registerTitle: "Create New Account",
+    registerSub: "Begin your first step toward emotional well-being",
+    registerNameLabel: "Full Name",
+    registerNamePlaceholder: "Your Name",
+    registerEmailPlaceholder: "please enter your Gmail address (example@gmail.com)",
+    registerBtn: "Register Now",
+    registerFooterText: "Already have an account?",
+    registerFooterLink: "Sign In Here",
+    valAllFieldsRequired: "All fields are required!",
+    valEmailGmailRequired: "Email must use a @gmail.com address!",
+    valPasswordMinLength: "Password must be at least 6 characters!",
+    valRegisterSuccess: "Registration successful! Welcome to Ruang Rasa.",
+    valRegisterFailed: "Registration failed, please try again with other details.",
+
+    // Chat Page
+    chatTitle: "Chat Room",
+    chatSidebarTitle: "Chat History",
+    chatNewBtn: "Start New Chat",
+    chatNoHistory: "No previous conversation history.",
+    chatCounselorSubtitle: "Ruang Rasa Virtual Counselor • Ready to listen to you 24/7",
+    chatWelcomeTitle: "Start a New Chat",
+    chatWelcomeText: "Type and send your first message. Whatever is bothering your mind — stress, anxiety, or fatigue — share it here. The virtual counselor is ready to listen privately.",
+    chatNetworkError: "Sorry, I am experiencing network issues while processing your story. Please make sure your internet is on and try sending your message again. ❤️",
+    chatListening: "Listening",
+    chatInputPlaceholder: "Tell me how you feel here...",
+    chatInputPlaceholderLoading: "Wait a moment...",
+    chatSendBtn: "Send",
+    chatNewTitle: "New Chat",
+    chatNewTitleSaved: "New Chat",
+
+    // Education Page Additional
+    eduHeaderTitle: "📖 Read Articles",
+    eduHeaderSub: "A collection of practical articles written from heart to heart to help you understand yourself and maintain mental health.",
+    eduSearchPlaceholder: "Search article titles or keywords...",
+    eduSortLabel: "Sort by:",
+    eduSortRecommend: "Recommendations",
+    eduSortTitleAsc: "Title (A-Z)",
+    eduSortTitleDesc: "Title (Z-A)",
+    eduSortTimeAsc: "Reading Time (Fastest)",
+    eduSortTimeDesc: "Reading Time (Longest)",
+    eduCategoryLabel: "Topic Category",
+    eduNoArticles: "No articles match your filter or keywords.",
+    eduReadMore: "Read More",
+    eduFinishRead: "Finished Reading",
+    eduDuration: "Duration: {time}",
+    eduTopic: "Topic: Applied Psychology",
+
+    // Statistics Page Additional
+    statsHeaderTitle: "📊 Mood Analysis & Stats",
+    statsHeaderSub: "Monitor emotion distribution graphs and get deep insights into your mood patterns.",
+    statsDistributionTitle: "Emotion Distribution",
+    statsDistributionSub: "This pie chart shows the breakdown of mood categories you have logged. Use this chart to track which feelings appear most frequently in your daily life.",
+    statsNoDistribution: "No emotional logging data yet.",
+    statsTotalLogs: "Total Logs",
+    statsConsistencyTitle: "Monthly Consistency",
+    statsConsistencySub: "This bar chart records your emotional journal activity level each month. This helps track your logging consistency for long-term psychological analysis.",
+    statsNoMonthly: "No monthly logging data yet.",
+    statsInsightHeader: "Your Emotion Pattern Analysis",
+    statsTableHeader: "Monthly Frequency Detail Table",
+    statsTableSub: "Here are the details of the mood logging frequency you perform each month.",
+    statsTableColMonth: "Month",
+    statsTableColFreq: "Logging Frequency",
+    statsTableNoData: "No monthly data yet",
+    statsTableTimes: "times",
+    statsLoading: "Analyzing your emotional stats..."
   }
+};
+
+// HELPER TRANSLATION FUNCTIONS FOR DATABASE VALUES
+
+export const translateMoodName = (name, lang) => {
+  if (lang !== "en") return name;
+  if (!name) return "";
+  const lower = name.toLowerCase();
+  if (lower.includes("sangat bahagia")) return "Very Happy";
+  if (lower.includes("bahagia")) return "Happy";
+  if (lower.includes("tenang")) return "Calm";
+  if (lower.includes("bersyukur")) return "Grateful";
+  if (lower.includes("stres") || lower.includes("stress")) return "Stressed";
+  if (lower.includes("sedih")) return "Sad";
+  if (lower.includes("marah")) return "Angry";
+  if (lower.includes("cemas")) return "Anxious";
+  if (lower.includes("bingung")) return "Confused";
+  if (lower.includes("produktif")) return "Productive";
+  if (lower.includes("semangat")) return "Excited";
+  if (lower.includes("biasa saja")) return "Neutral";
+  if (lower.includes("masih sedih")) return "Still Sad";
+  if (lower.includes("masih stres") || lower.includes("masih stress")) return "Still Stressed";
+  if (lower.includes("masih cemas")) return "Still Anxious";
+  return name;
+};
+
+export const translateMoodDesc = (desc, moodName, lang) => {
+  if (lang !== "en") return desc;
+  if (!desc) return "";
+  const nameLower = (moodName || "").toLowerCase();
+  
+  if (nameLower.includes("sangat bahagia")) {
+    return "Feeling extremely happy, joyful, and full of energy.";
+  }
+  if (nameLower.includes("bahagia")) {
+    return "Feeling good, positive, and content with your day.";
+  }
+  if (nameLower.includes("tenang")) {
+    return "Feeling peaceful, relaxed, and mentally at ease.";
+  }
+  if (nameLower.includes("bersyukur")) {
+    return "Feeling thankful and appreciative of the good things.";
+  }
+  if (nameLower.includes("stres") || nameLower.includes("stress")) {
+    return "Feeling overwhelmed, tense, or pressured under load.";
+  }
+  if (nameLower.includes("sedih")) {
+    return "Feeling down, unhappy, disappointed, or empty.";
+  }
+  if (nameLower.includes("marah")) {
+    return "Feeling annoyed, irritated, or angry about something.";
+  }
+  if (nameLower.includes("cemas")) {
+    return "Feeling worried, nervous, restless, or uneasy.";
+  }
+  if (nameLower.includes("bingung")) {
+    return "Feeling unsure, hesitant, or unclear about choices.";
+  }
+  if (nameLower.includes("produktif") || nameLower.includes("semangat")) {
+    return "Feeling focused, motivated, and ready to get things done.";
+  }
+  return desc;
+};
+
+export const translateActivityText = (text, lang) => {
+  if (lang !== "en") return text;
+  if (!text) return "";
+  const lower = text.toLowerCase();
+  
+  // Titles mapping
+  if (lower.includes("jurnal syukur") || lower.includes("rasa bersyukur")) return "Gratitude Journal";
+  if (lower.includes("latihan napas") || lower.includes("pernapasan 4-7-8")) return "4-7-8 Breathing Exercise";
+  if (lower.includes("menulis bebas") || lower.includes("menulis ekspresif") || lower.includes("tuliskan perasaan")) return "Expressive Writing";
+  if (lower.includes("jalan kaki") || lower.includes("jalan-jalan")) return "Relaxed Walk";
+  if (lower.includes("istirahat layar") || lower.includes("detoks gawai")) return "Screen Break";
+  if (lower.includes("bercerita") || lower.includes("hubungi teman")) return "Reach Out to Someone";
+  if (lower.includes("relaksasi otot") || lower.includes("peregangan")) return "Muscle Stretching";
+  if (lower.includes("grounding")) return "5-4-3-2-1 Grounding";
+  if (lower.includes("kurangi kafein") || lower.includes("batasi kafein")) return "Limit Caffeine";
+  if (lower.includes("pomodoro")) return "Pomodoro Technique";
+  if (lower.includes("mendengarkan musik") || lower.includes("musik penenang")) return "Listen to Soothing Music";
+  if (lower.includes("rapikan area") || lower.includes("rapikan meja")) return "Tidy Up Space";
+  if (lower.includes("sleep hygiene") || lower.includes("tidur tepat waktu") || lower.includes("jam tidur")) return "Sleep Hygiene Routine";
+  if (lower.includes("momen bahagia") || lower.includes("foto")) return "Capture Happy Moments";
+  if (lower.includes("apresiasi diri")) return "Self-Appreciation";
+
+  // Descriptions / Details mapping
+  if (lower.includes("tulis 3 hal") || lower.includes("menuliskan hal paling berharga")) return "Write down 3 things you are grateful for today.";
+  if (lower.includes("sesi napas") || lower.includes("bernapas perlahan")) return "Inhale for 4s, hold for 7s, exhale for 8s to calm down.";
+  if (lower.includes("tumpahkan perasaan") || lower.includes("tulis apa saja")) return "Write down whatever is on your mind without filter.";
+  if (lower.includes("jalan kaki santai") || lower.includes("menyegarkan pikiran")) return "Take a 10-15 minute walk around the park.";
+  if (lower.includes("matikan gawai") || lower.includes("layar ponsel")) return "Turn off screens for 10 minutes to rest your eyes.";
+  if (lower.includes("ceritakan") || lower.includes("mengobrol ringan")) return "Talk to a close friend or family member.";
+  if (lower.includes("stretch") || lower.includes("leher, bahu")) return "Do a 2-3 minute stretch for your neck and shoulders.";
+  if (lower.includes("sebutkan 5 hal")) return "Observe 5 things you can see, 4 you can touch, etc.";
+  if (lower.includes("kopi atau teh") || lower.includes("kafein")) return "Avoid caffeine to prevent worsening anxiety.";
+  if (lower.includes("25 menit") || lower.includes("burnout")) return "Work for 25 minutes, then take a 5-minute break.";
+  if (lower.includes("musik bernada") || lower.includes("instrumental")) return "Listen to relaxing instrumental tracks.";
+  if (lower.includes("bersihkan mejamu") || lower.includes("ketegangan visual")) return "Clear clutter from your workspace for visual calm.";
+  if (lower.includes("ritme tidur") || lower.includes("melatonin")) return "Establish a sleep routine and dim lights 1 hour before bed.";
+  if (lower.includes("abadikan") || lower.includes("kamera")) return "Take a photo of something pleasant today as a keepsake.";
+  if (lower.includes("ucapkan terima kasih")) return "Acknowledge your efforts and give yourself credit.";
+
+  // Default fallbacks for common dashboard insights
+  if (lower.includes("minum air putih")) return "Drink at least 8 glasses of water today.";
+  if (lower.includes("lakukan peregangan otot")) return "Do light muscle stretches for 5 minutes.";
+  if (lower.includes("tidur tepat waktu")) return "Sleep on time to maintain your energy level for tomorrow.";
+  if (lower.includes("sempatkan waktu 10 menit")) return "Take 10 minutes to be still and breathe deeply.";
+  if (lower.includes("tuliskan perasaan sedihmu")) return "Write down your sad feelings in the \"Chat Room\" menu to release your emotions.";
+  if (lower.includes("dengarkan musik bernada tenang")) return "Listen to calm music or soothing instrumentals.";
+  if (lower.includes("cobalah jalan kaki santai 15 menit")) return "Try a relaxed 15-minute walk around the nearest park to refresh your mind.";
+  if (lower.includes("hubungi teman dekat atau keluarga")) return "Reach out to close friends or family for a light chat.";
+  if (lower.includes("gunakan metode pomodoro 25 menit")) return "Use the 25-minute Pomodoro technique while working to avoid burnout.";
+  if (lower.includes("lakukan peregangan leher")) return "Stretch your neck, shoulders, and back for 2-3 minutes between activities.";
+  if (lower.includes("rapikan meja kerja")) return "Tidy up your workspace or surrounding area to reduce visual tension.";
+  if (lower.includes("minum secangkir teh hangat")) return "Drink a cup of warm tea and rest your eyes from screens for 10 minutes.";
+  if (lower.includes("lakukan latihan pernapasan diafragma")) return "Practice 4-7-8 diaphragmatic breathing to calm your heart rate.";
+  if (lower.includes("praktikkan metode grounding")) return "Practice the 5-4-3-2-1 Grounding method to refocus your mind.";
+  if (lower.includes("batasi konsumsi kopi")) return "Limit coffee or caffeinated tea today to prevent worsening anxiety.";
+  if (lower.includes("fokus pada hal-hal kecil")) return "Focus on small things you can control directly right now.";
+  if (lower.includes("pertahankan perasaan senang ini")) return "Maintain this positive feeling and share your positive energy with those around you.";
+  if (lower.includes("tuliskan hal paling berharga")) return "Write down the most valuable thing you are grateful for today in your journal.";
+  if (lower.includes("abadikan momen bahagia")) return "Capture today's happy moments with a photo as a reminder for tomorrow.";
+  if (lower.includes("apresiasi dirimu sendiri")) return "Appreciate yourself for the hard work you have put in.";
+
+  return text;
+};
+
+export const translateMonthName = (month, lang) => {
+  if (lang !== "en") return month;
+  if (!month) return "";
+  const monthsMap = {
+    "januari": "January",
+    "februari": "February",
+    "maret": "March",
+    "april": "April",
+    "mei": "May",
+    "juni": "June",
+    "juli": "July",
+    "agustus": "August",
+    "september": "September",
+    "oktober": "October",
+    "november": "November",
+    "desember": "December"
+  };
+  return monthsMap[month.toLowerCase()] || month;
 };
