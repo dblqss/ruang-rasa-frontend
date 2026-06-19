@@ -60,7 +60,7 @@ function Login() {
             R
           </div>
           <h1 className="text-3xl font-extrabold text-gray-950 tracking-tight">
-            Ruang Rasa
+            Ruang Guru
           </h1>
           <p className="text-gray-500 mt-2 text-sm">
             Tempat aman untuk melacak emosi & kesehatan mentalmu
