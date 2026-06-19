@@ -8,6 +8,114 @@ export default function Education() {
 
   const articles = [
     {
+      title: "Menemukan Energi dalam Sunyi: Panduan Sukses Karir & Sosial untuk Introvert",
+      category: "Psikologi Positif",
+      time: "5 menit baca",
+      icon: "🤫",
+      color: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      intro: "Sering merasa lelah setelah bersosialisasi? Menjadi introvert bukanlah kelemahan, melainkan kekuatan hening yang menakjubkan jika dikelola dengan benar.",
+      content: `Menjadi seorang introvert di dunia yang sepertinya tidak pernah berhenti berbicara bisa terasa sangat menantang. Banyak orang keliru menganggap introversi sebagai rasa malu (shyness) atau kurangnya kemampuan sosial. Padahal, introversi murni merupakan cara seseorang merespons stimulasi eksternal dan bagaimana mereka mengisi kembali 'baterai emosional' mereka.
+
+Baterai sosial seorang introvert akan terkuras saat berada di tengah keramaian atau interaksi sosial yang intens. Mereka membutuhkan waktu menyendiri (solitude) untuk mengisi ulang energi tersebut. Sebaliknya, kaum ekstrovert mendapatkan energi justru dari interaksi dengan dunia luar.
+
+Menemukan kesuksesan sebagai introvert:
+Pertama, hargai kebutuhanmu akan kesunyian. Jangan merasa bersalah jika kamu menolak ajakan berkumpul hanya karena ingin membaca buku atau bersantai di rumah. Itu adalah bentuk perawatan diri (self-care) yang sangat penting bagi kesehatan mentalmu.
+
+Kedua, gunakan kekuatan mendengarmu. Introvert adalah pendengar yang sangat baik dan pemikir mendalam. Dalam lingkungan kerja atau pertemanan, kontribusimu yang dipikirkan dengan matang sering kali jauh lebih bernilai daripada sekadar berbicara tanpa arah.
+
+Ketiga, kelola energi sosialmu secara cerdas. Jika kamu tahu ada acara penting besok, luangkan waktu malam ini untuk beristirahat penuh. Mengetahui kapasitas diri dan menetapkan batasan adalah kunci agar kamu tetap bisa bersosialisasi tanpa mengalami kelelahan mental.`
+    },
+    {
+      title: "Lebih dari Sekadar Rapi: Mengupas Mitos dan Fakta Mengenai OCD",
+      category: "Kesehatan Mental",
+      time: "5 menit baca",
+      icon: "🧼",
+      color: "bg-indigo-50 text-indigo-700 border-indigo-100",
+      intro: "Banyak orang mengira OCD hanyalah sifat suka kebersihan yang berlebihan. Mari pahami esensi medis di balik Obsessive-Compulsive Disorder.",
+      content: `Obsessive-Compulsive Disorder (OCD) sering kali disalahpahami dalam budaya populer. Kita sering mendengar orang berkata, 'Aku agak OCD hari ini' hanya karena mereka ingin merapikan meja kerja atau mencuci tangan. Namun, OCD secara medis adalah gangguan kesehatan mental yang serius, kronis, dan sering kali melumpuhkan penderitanya.
+
+OCD terdiri dari dua komponen utama: Obsesi dan Kompulsi. Obsesi adalah pikiran, dorongan, atau bayangan mental yang berulang, tidak diinginkan, dan memicu kecemasan hebat (misalnya, takut terkontaminasi kuman, atau takut mencelakai orang lain secara tidak sengaja). Kompulsi adalah perilaku berulang yang dirasa harus dilakukan oleh penderita untuk meredakan kecemasan tersebut (misalnya, mencuci tangan puluhan kali, atau memeriksa kunci pintu secara berulang-ulang dengan pola tertentu).
+
+Memahami kenyataan hidup dengan OCD:
+Pertama, ketahuilah bahwa tindakan kompulsi sebenarnya tidak memberikan kepuasan, melainkan hanya meredakan kecemasan untuk sementara waktu. Penderita OCD sering kali menyadari bahwa pikiran mereka tidak logis, namun mereka merasa tidak berdaya untuk menghentikannya.
+
+Kedua, dukung tanpa menghakimi. Jika ada teman atau keluarga dengan gejala OCD, jangan memarahi mereka atau memaksa mereka menghentikan ritualnya secara mendadak. Hal tersebut justru akan melipatgandakan tingkat kecemasan mereka.
+
+Ketiga, cari terapi profesional. Penanganan OCD yang paling efektif adalah kombinasi antara terapi perilaku (khususnya Exposure and Response Prevention - ERP) dan, jika diperlukan, obat-obatan medis di bawah pengawasan psikiater. Sembuh dari OCD bukan berarti menghilangkan kecemasan sepenuhnya, melainkan belajar mengendalikan reaksi kita terhadap pikiran obsesif tersebut.`
+    },
+    {
+      title: "Menghadapi Pasangan atau Teman NPD (Narcissistic Personality Disorder)",
+      category: "Hubungan",
+      time: "6 menit baca",
+      icon: "🎭",
+      color: "bg-red-50 text-red-700 border-red-100",
+      intro: "Merasa dimanipulasi atau selalu disalahkan? Ketahui tanda-tanda kepribadian narsistik (NPD) dan cara aman menjaga kesehatan mentalmu.",
+      content: `Menjalin hubungan dengan seseorang yang memiliki Gangguan Kepribadian Narsistik (NPD) bisa sangat melelahkan secara emosional dan mental. NPD ditandai dengan pola jangka panjang berupa kebutuhan ekstrem akan pujian, kurangnya empati terhadap orang lain, dan keyakinan bahwa diri mereka lebih unggul dari orang lain.
+
+Di awal hubungan, seorang narsistik sering kali menampilkan pesona luar biasa (love bombing) untuk memikatmu. Namun, seiring berjalannya waktu, mereka akan mulai memanipulasi emosimu. Taktik umum yang mereka gunakan meliputi gaslighting (membuatmu meragukan ingatan atau kewarasanmu sendiri) dan pemutarbalikan fakta sehingga kamu selalu menjadi pihak yang bersalah dalam setiap konflik.
+
+Cara melindungi diri saat berhadapan dengan NPD:
+Pertama, sadarilah bahwa kamu tidak bisa mengubah atau menyembuhkan mereka. NPD adalah gangguan kepribadian mendalam yang membutuhkan terapi profesional jangka panjang. Berhenti berharap mereka akan mendadak meminta maaf dengan tulus atau memahami perasaanmu.
+
+Kedua, tetapkan batasan (boundaries) yang sangat ketat. Jangan biarkan mereka mengontrol keuangan, pertemanan, atau keputusan pribadimu. Jika mereka mulai berteriak atau memanipulasi, komunikasikan batasanmu dengan tenang dan tegas, lalu tinggalkan percakapan tersebut.
+
+Ketiga, terapkan metode 'Gray Rock' jika terpaksa harus tetap berinteraksi (misalnya rekan kerja atau mantan pasangan yang memiliki anak bersama). Gray Rock berarti bersikap membosankan, dingin, dan tidak memberikan respons emosional apa pun terhadap provokasi mereka. Tanpa adanya reaksi emosional dari Anda, pelaku narsistik akan kehilangan ketertarikan untuk memanipulasi Anda.`
+    },
+    {
+      title: "Mengenali Gangguan Kecemasan Sosial (Social Anxiety)",
+      category: "Kecemasan",
+      time: "5 menit baca",
+      icon: "👥",
+      color: "bg-amber-50 text-amber-700 border-amber-100",
+      intro: "Merasa sangat gugup saat harus berbicara di depan umum atau bertemu orang baru? Pelajari cara melatih pikiran dari rasa takut dihakimi.",
+      content: `Hampir semua orang pernah merasa gugup sebelum presentasi atau wawancara kerja. Namun bagi penderita Gangguan Kecemasan Sosial (Social Anxiety Disorder), ketakutan bersosialisasi ini begitu intens hingga mengganggu aktivitas sehari-hari mereka. Ketakutan terbesar mereka bukanlah keramaian itu sendiri, melainkan ketakutan akan dihakimi, dipermalukan, atau ditolak oleh orang lain.
+
+Saat berada di situasi sosial, mereka akan mengalami gejala fisik nyata seperti jantung berdebar kencang, keringat dingin, gemetar, mual, hingga sulit berbicara. Akibatnya, mereka cenderung menghindari pertemuan sosial, yang pada akhirnya memicu perasaan terisolasi dan kesepian.
+
+Langkah melatih kecemasan sosial:
+Pertama, tantang pikiran negatifmu. Saat merasa cemas orang lain menilaimu buruk, tanyakan pada dirimu: Apakah ada bukti nyata mereka menghakimiku? Sering kali ketakutan itu hanyalah skenario terburuk yang diciptakan oleh pikiran cemasmu sendiri.
+
+Kedua, fokuslah ke luar, bukan ke dalam diri. Penderita kecemasan sosial terlalu fokus memantau diri sendiri (misalnya: apakah caraku berdiri aneh? Apakah suaraku bergetar?). Cobalah alihkan perhatianmu untuk mendengarkan topik pembicaraan orang lain secara aktif.
+
+Ketiga, lakukan paparan bertahap (gradual exposure). Jangan langsung memaksakan diri menghadiri pesta besar. Mulailah dari langkah kecil, seperti menyapa kasir di toko, memesan makanan dengan suara jelas, atau datang ke kumpul kecil bersama 2-3 orang teman dekat.`
+    },
+    {
+      title: "Mengatasi Sindrom Impostor: Berhenti Merasa Diri sebagai Penipu",
+      category: "Manajemen Stres",
+      time: "5 menit baca",
+      icon: "🕵️",
+      color: "bg-red-50 text-red-700 border-red-100",
+      intro: "Merasa pencapaianmu hanyalah keberuntungan belaka dan takut ketahuan tidak kompeten? Yuk, kenali impostor syndrome dan cara mengatasinya.",
+      content: `Pernahkah kamu meraih kesuksesan akademik atau karir, namun di dalam hati kamu merasa bahwa kamu tidak cukup pintar? Apakah kamu merasa semua itu hanyalah kebetulan atau keberuntungan, dan kamu selalu cemas bahwa suatu hari nanti orang-orang akan menyadari bahwa kamu sebenarnya tidak kompeten?
+
+Kondisi psikologis ini dikenal sebagai Impostor Syndrome atau Sindrom Impostor. Menariknya, sindrom ini paling sering dialami oleh orang-orang yang berprestasi tinggi. Mereka gagal menginternalisasi kesuksesan mereka sendiri dan terus merasa seperti seorang penipu di tengah lingkungan mereka.
+
+Cara berdamai dengan Impostor Syndrome:
+Pertama, bedakan antara perasaan dan fakta. Merasa tidak kompeten bukan berarti kamu benar-benar tidak kompeten. Sadarilah bahwa perasaan ragu pada diri sendiri adalah hal yang wajar dialami oleh siapa saja yang sedang belajar dan berkembang.
+
+Kedua, dokumentasikan prestasimu. Buat catatan khusus berisi daftar keberhasilan, sertifikat, atau pujian tertulis yang pernah kamu terima dari dosen atau atasan. Ketika rasa tidak percaya diri menyerang, baca kembali catatan tersebut sebagai bukti objektif atas kemampuan dirimu.
+
+Ketiga, bagikan apa yang kamu rasakan. Berbicara dengan mentor tepercaya atau teman dekat akan menyadarkanmu bahwa banyak orang sukses lainnya juga merasakan hal yang sama. Kamu tidak perlu menjadi sempurna untuk diakui; belajarlah untuk menerima kesalahan sebagai bagian dari proses belajar.`
+    },
+    {
+      title: "Membangun Ritme Tidur Sehat di Tengah Kesibukan",
+      category: "Kesehatan Tidur",
+      time: "5 menit baca",
+      icon: "🌙",
+      color: "bg-emerald-50 text-emerald-700 border-emerald-100",
+      intro: "Tuntutan pekerjaan atau kuliah sering kali merusak ritme tidur tubuh kita. Temukan cara aman menyeimbangkan waktu tidur Anda.",
+      content: `Di dunia modern yang serba cepat, tidur sering kali menjadi hal pertama yang kita korbankan demi menyelesaikan tugas atau mengejar target kerja. Padahal, kurang tidur secara kronis dapat menurunkan sistem kegagalan tubuh, merusak konsentrasi, dan meningkatkan risiko gangguan kecemasan serta depresi.
+
+Tubuh manusia dikendalikan oleh jam internal biologis yang disebut ritme sirkadian. Ritme ini merespons sinyal cahaya dan kegelapan untuk mengatur kapan kita merasa segar dan kapan kita merasa mengantuk. Ketika kita tidur pada waktu yang tidak teratur, ritme ini terganggu, menyebabkan tubuh terasa lelah sepanjang hari.
+
+Tips menjaga ritme sirkadian tetap seimbang:
+Pertama, buat jadwal tidur yang konsisten. Usahakan untuk tidur dan bangun pada jam yang sama setiap hari, bahkan di hari libur akhir pekan. Konsistensi ini akan melatih tubuhmu untuk secara otomatis merasa mengantuk saat waktunya tiba.
+
+Kedua, batasi konsumsi kafein dan makanan berat mendekati jam tidur. Kafein dapat bertahan di dalam tubuh hingga 6-8 jam. Hindari kopi atau minuman bersoda di sore dan malam hari agar tidak mengganggu fase tidur dalammu.
+
+Ketiga, optimalkan kenyamanan ruangan tidurmu. Pastikan kamar tidurmu cukup dingin, tenang, dan gelap sepenuhnya. Jika cahaya lampu masih menyala, otak akan menunda produksi melatonin, sehingga kamu akan kesulitan terlelap.`
+    },
+    {
       title: "Mengenali Hubungan Toxic dan Cara Keluar Darinya",
       category: "Hubungan",
       time: "5 menit baca",
